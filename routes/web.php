@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// ADMIN
+    // Data Pegawai
+    Route::resource('pegawai','PegawaiController');
+    // Absen Pegawai
+    Route::resource('absen','AbsenController');
+
+
+// PEGAWAI
+    // Absensi
+    Route::resource('absensi','AbsenPegawai');
+    Route::get('absensi-keluar','AbsenPegawai@keluar');
