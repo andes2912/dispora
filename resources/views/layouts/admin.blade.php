@@ -13,6 +13,7 @@
     <title>@yield('title')</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Custom CSS -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -352,8 +353,12 @@
                             <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">Master Data</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('pegawai.index')}}">Pegawai</a></li>
-                                <li><a href="#">Cuti</a></li>
+                                <li><a href="{{route('cuti.index')}}">Cuti</a></li>
                                 <li><a href="{{route('absen.index')}}">Absen</a></li>
+                                <li><a href="{{route('pangkat.index')}}">Pangkat</a></li>
+                                <li><a href="{{route('gaji.index')}}">Gaji</a></li>
+                                <li><a href="{{route('mutasi.index')}}">Mutasi</a></li>
+                                <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -368,7 +373,12 @@
                 <!-- item-->
                 <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+                {{-- <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> --}}
+                <a class="nav-link" data-toggle="tooltip" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
+                    </form>
+                    <i class="mdi mdi-power"></i>
+                </a>
             </div>
             <!-- End Bottom points-->
         </aside>
@@ -516,9 +526,10 @@
     <script src="{{asset('assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
     <!-- This is data table -->
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-
+    <script src="{{asset('assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
         $('#myTable').DataTable();
+        $(".select2").select2();
     </script>
     @yield('scripts')
 </body>

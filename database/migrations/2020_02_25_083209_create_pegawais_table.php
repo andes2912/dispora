@@ -18,7 +18,7 @@ class CreatePegawaisTable extends Migration
             $table->UnsignedBigInteger('id_user');
             $table->string('nip');
             $table->string('tipepns');
-            $table->string('nipbaru')->nullable();
+            $table->integer('nipbaru')->nullable();
             $table->string('nama');
             $table->string('ttl');
             $table->string('tempatlahir');
@@ -35,9 +35,11 @@ class CreatePegawaisTable extends Migration
             $table->string('nokarsuskaris')->nullable();;
             $table->string('nik');
             $table->string('foto');
+            $table->integer('id_pangkat')->nullable();
+            $table->integer('id_gaji')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

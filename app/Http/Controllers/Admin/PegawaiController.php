@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Pegawai;
 use App\User;
@@ -60,6 +61,7 @@ class PegawaiController extends Controller
         if (auth()->check()) {
             if (auth::user()->role == "Admin") {
                 $user = New User;
+                $user->nip = $request->nip;
                 $user->name = $request->name;
                 $user->email = $request->email;
                 $user->role = 'Pegawai';
@@ -77,7 +79,7 @@ class PegawaiController extends Controller
 
                     $pegawai = New Pegawai;
                     $pegawai->id_user = $user->id;
-                    $pegawai->nip = $request->nip;
+                    $pegawai->nip = $user->nip;
                     $pegawai->tipepns = $request->tipepns;
                     $pegawai->nip = $request->nip;
                     $pegawai->nama = $user->name;
@@ -196,6 +198,7 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Pegawai::findOrFail($id);
+        
     }
 }

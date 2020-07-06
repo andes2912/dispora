@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbsensTable extends Migration
+class CreatePangkatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateAbsensTable extends Migration
      */
     public function up()
     {
-        Schema::create('absens', function (Blueprint $table) {
+        Schema::create('pangkats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->UnsignedBigInteger('id_pegawai');
+            $table->unsignedBigInteger('id_user');
             $table->string('nip');
             $table->string('nama');
-            $table->string('tgl');
-            $table->string('jam_masuk');
-            $table->string('jam_keluar')->nullable();
-            $table->string('status');
-            $table->string('keterangan')->nullable();
+            $table->string('jabatan');
+            $table->string('golongan');
+            $table->string('kelas');
+            $table->string('kedudukan');
             $table->timestamps();
 
-            $table->foreign('id_pegawai')->references('id')->on('pegawais')->ondelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
@@ -36,6 +36,6 @@ class CreateAbsensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absens');
+        Schema::dropIfExists('pangkats');
     }
 }

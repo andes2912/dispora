@@ -23,15 +23,15 @@
                     <tbody>
                         @foreach ($pegawai as $item)
                             <tr>
-                                <td>{{$item->nip}}</td>
+                                <td><a href="{{route('pegawai.show', $item->id)}}">{{$item->nip}}</a></td>
                                 <td>{{$item->nama}}</td>
                                 <td>{{$item->nik}}</td>
                                 <td>{{$item->alamat}}</td>
                                 <td>{{$item->agama}}</td>
                                 <td>{{$item->kelamin}}</td>
                                 <td>
-                                    <a href="{{route('pegawai.show', $item->id)}}" class="btn btn-info btn-sm">Lihat</a>
                                     <a href="{{route('pegawai.edit', $item->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{route('pegawai.destroy', $item->id)}}" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

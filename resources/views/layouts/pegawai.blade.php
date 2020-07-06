@@ -351,7 +351,7 @@
                         <li>
                             <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">Master Data</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('pegawai.index')}}">Cuti</a></li>
+                                <li><a href="{{route('cuti-pegawai.index')}}">Cuti</a></li>
                                 <li><a href="{{route('absensi.index')}}">Absen</a></li>
                                 <li><a href="{{route('absen.index')}}">Mutasi</a></li>
                             </ul>
@@ -368,7 +368,11 @@
                 <!-- item-->
                 <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
                 <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+                <a class="nav-link" data-toggle="tooltip" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
+                    </form>
+                    <i class="mdi mdi-power"></i>
+                </a>
             </div>
             <!-- End Bottom points-->
         </aside>

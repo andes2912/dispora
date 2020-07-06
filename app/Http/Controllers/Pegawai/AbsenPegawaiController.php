@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pegawai;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Pegawai;
 use App\Absen;
 use Carbon\carbon;
 use Auth;
 
-class AbsenPegawai extends Controller
+class AbsenPegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
