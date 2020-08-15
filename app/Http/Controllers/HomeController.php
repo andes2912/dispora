@@ -25,12 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Admin") {
+            if (auth::user()->role == "Admin" && Auth::user()->status == "Aktif") {
                 return view('admin.home');
-            } elseif(auth::user()->role == "Pegawai") {
+            } elseif(auth::user()->role == "Pegawai" && Auth::user()->status == "Aktif") {
                 return view('pegawai.home');
-            } else {
-                return redirect('home');
+            } elseif(auth::user()->role == "Admin" || auth::user()->role == "Pegawai" && auth::user()->status == "Pensiun") {
+                return redirect('login');
             }
         }
     }

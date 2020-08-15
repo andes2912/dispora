@@ -58,5 +58,15 @@ Route::get('/home', 'HomeController@index')->name('home');
     // Absensi
     Route::resource('absensi','Pegawai\AbsenPegawaiController');
     Route::get('absensi-keluar','Pegawai\AbsenPegawaiController@keluar');
+
+    // Cuti
     Route::resource('cuti-pegawai','Pegawai\CutiPegawaiController');
     Route::get('nama-approval-cuti','Pegawai\CutiPegawaiController@nama_approval_cuti');
+
+    // Mutasi
+    Route::resource('mutasi-pegawai','Pegawai\MutasiPegawaiController');
+    Route::get('select-jabatan-mutasi-pegawai','Pegawai\MutasiPegawaiController@select_jabatan_mutasi_pegawai');
+    Route::get('select-id-mutasi-pegawai','Pegawai\MutasiPegawaiController@select_id_mutasi_pegawai');
+
+    // Pensiun
+    Route::resource('pensiun-pegawai','Pegawai\PensiunPegawaiController');

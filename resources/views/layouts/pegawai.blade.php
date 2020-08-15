@@ -20,6 +20,7 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
+    <script src="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
@@ -353,7 +354,8 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{route('cuti-pegawai.index')}}">Cuti</a></li>
                                 <li><a href="{{route('absensi.index')}}">Absen</a></li>
-                                <li><a href="{{route('absen.index')}}">Mutasi</a></li>
+                                <li><a href="{{route('mutasi-pegawai.index')}}">Mutasi</a></li>
+                                <li><a href="{{route('pensiun-pegawai.index')}}">Pensiun</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -503,6 +505,7 @@
     <script src="{{asset('assets/plugins/bootstrap/js/popper.min.js')}}"></script>
 
     <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{asset('assets/js/jquery.slimscroll.js')}}"></script>
     <!--Wave Effects -->

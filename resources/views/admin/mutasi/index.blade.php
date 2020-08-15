@@ -23,15 +23,17 @@
                         </tr>
                     </thead>
                         @foreach ($mutasi as $item)
-                            <td>{{$item->nip}}</td>
-                            <td>{{$item->nama}}</td>
-                            <td>{{$item->no_surat}}</td>
-                            <td>{{$item->tgl_mutasi}}</td>
-                            <td>{{$item->jabatan_lama}}</td>
-                            <td>{{$item->jabatan_baru}}</td>
-                            <td>
-                                <a href="" class="btn btn-info btn-sm">Lihat</a>
-                            </td>
+                            <tr>
+                                <td>{{$item->nip}}</td>
+                                <td>{{$item->nama}}</td>
+                                <td>{{$item->no_surat}}</td>
+                                <td>{{$item->tgl_mutasi}}</td>
+                                <td>{{$item->jabatan_lama}}</td>
+                                <td>{{$item->jabatan_baru}}</td>
+                                <td>
+                                    <a href="" class="btn btn-info btn-sm">Lihat</a>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

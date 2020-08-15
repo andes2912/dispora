@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Pegawai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\pangkat;
 use App\mutasi;
-use Carbon\carbon;
+use App\pangkat;
 use Auth;
 
-class MutasiController extends Controller
+class MutasiPegawaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +17,8 @@ class MutasiController extends Controller
      */
     public function index()
     {
-        $mutasi = mutasi::all();
-        return view('admin.mutasi.index', compact('mutasi'));
+        $mutasi = mutasi::where('nip',Auth::user()->nip)->orderBy('id','DESC')->get();
+        return view('pegawai.mutasi.index', compact('mutasi'));
     }
 
     /**
@@ -29,8 +28,8 @@ class MutasiController extends Controller
      */
     public function create()
     {
-        $pegawai = pangkat::all();
-        return view('admin.mutasi.create', compact('pegawai'));
+        return view('pegawai.mutasi.create');
+        
     }
 
     /**
@@ -43,21 +42,18 @@ class MutasiController extends Controller
     {
         $mutasi = new mutasi;
         $mutasi->id_pangkat = $request->id_pangkat;
-        $mutasi->nip = $request->nip;
-        $mutasi->nama = $request->nama;
+        $mutasi->nip = Auth::user()->nip;
+        $mutasi->nama = Auth::user()->name;
         $mutasi->no_surat = $request->no_surat;
         $mutasi->perihal = $request->perihal;
-        $mutasi->tgl_mutasi = Carbon::parse($request->tgl_mutasi)->format('d-m-Y');
-        $mutasi->tgl_masuk = Carbon::parse($request->tgl_masuk)->format('d-m-Y');
+        $mutasi->tgl_mutasi = $request->tgl_mutasi;
+        $mutasi->tgl_masuk = $request->tgl_masuk;
         $mutasi->jabatan_lama = $request->jabatan_lama;
         $mutasi->jabatan_baru = $request->jabatan_baru;
+        $mutasi->status = '0';
+        $mutasi->save();
 
-        if ($mutasi->save()) {
-            $pangkat = pangkat::where('id', $mutasi->id_pangkat)->first();
-            $pangkat->jabatan = $mutasi->jabatan_baru;
-            $pangkat->Save();
-        }
-        return redirect('mutasi');
+        return redirect('mutasi-pegawai');
     }
 
     /**
@@ -105,26 +101,8 @@ class MutasiController extends Controller
         //
     }
 
-    // Select Nama Pegawai
-    public function select_nama_mutasi(Request $request)
-    {
-        $nama_mutasi = pangkat::SelectRaw('pangkats.nip,pangkats.id_user,pangkats.nama')
-            ->where('pangkats.nip', $request->nip)
-            ->get();
-
-            $select = '';
-            $select .= '
-                        <select class="form-control" name="nama">
-                        ';
-                        foreach ($nama_mutasi as $mutasi) {
-            $select .= '<option value="'.$mutasi->nama.'">'.$mutasi->nama.'</option>';
-                        }'
-                        </select>';
-            return $select;
-    }
-
     // Select Nama Jabatan
-    public function select_jabatan_mutasi(Request $request)
+    public function select_jabatan_mutasi_pegawai(Request $request)
     {
         $jabatan_mutasi = pangkat::SelectRaw('pangkats.nip,pangkats.jabatan')
         ->where('nip', $request->nip)
@@ -143,7 +121,7 @@ class MutasiController extends Controller
     }
 
     // Select ID Pangkat
-    public function select_id_mutasi(Request $request)
+    public function select_id_mutasi_pegawai(Request $request)
     {
         $id_mutasi = pangkat::SelectRaw('pangkats.nip,pangkats.id')
         ->where('nip', $request->nip)
@@ -159,5 +137,4 @@ class MutasiController extends Controller
                     </select>';
         return $select;
     }
-
 }
