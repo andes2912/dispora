@@ -24,7 +24,7 @@ class CreateMutasisTable extends Migration
             $table->string('tgl_masuk');
             $table->string('jabatan_lama');
             $table->string('jabatan_baru');
-            $table->integer('status',3);
+            $table->integer('status');
             $table->timestamps();
 
             $table->foreign('id_pangkat')->references('id')->on('pangkats')->onDelete('cascade');

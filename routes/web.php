@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -53,6 +53,11 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('select-kedudukan-pensiun','Admin\PensiunController@select_kedudukan_pensiun');
     Route::get('select-gaji-pensiun','Admin\PensiunController@select_gaji_pensiun');
     Route::get('select-tunjangan-pensiun','Admin\PensiunController@select_tunjangan_pensiun');
+
+
+// KADIS
+    // Verifikasi
+    Route::resource('verifikasi-kadis','Kadis\VerifikasiController');
 
 // PEGAWAI
     // Absensi
