@@ -26,8 +26,13 @@ class CutiPegawaiController extends Controller
     public function create()
     {
         $pegawai = pegawai::where('id_user',auth::user()->id)->first();
-        $approval = User::where('role','Admin')->get();
-        return view('pegawai.cuti.create', compact('pegawai','approval'));
+        $approval = User::where('role','Kadis')->get();
+        $cek = cuti::where('id_user',Auth::user()->id)->first();
+        if ($cek->status_approval !== 'Proses') {
+            return view('pegawai.cuti.create', compact('pegawai','approval','cek'));
+        } else {
+            return redirect('cuti-pegawai');
+        }
     }
 
 
@@ -76,7 +81,7 @@ class CutiPegawaiController extends Controller
             }
         }
 
-        return back();
+        return redirect('cuti-pegawai');
     }
 
 

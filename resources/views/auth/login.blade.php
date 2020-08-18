@@ -45,12 +45,22 @@
                         <h3 class="box-title m-b-20">Masuk</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="email" name="email" placeholder="E-mail" required> 
+                                <input class="form-control @error('email') is-invalid @enderror value="{{ old('email') }} type="email" name="email" placeholder="E-mail" required> 
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" name="password" placeholder="Password" required> 
+                                <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" required autocomplete="current-password"> 
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                         </div>
                      

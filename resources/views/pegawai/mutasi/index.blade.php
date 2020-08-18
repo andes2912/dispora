@@ -13,9 +13,9 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>NIP</th>
+                            {{-- <th>NIP</th> --}}
                             <th>Nama</th>
-                            <th>Jumlah</th>
+                            <th>No. Surat</th>
                             <th>Tgl Pengajuan</th>
                             <th>Jabatan Baru</th>
                             <th>Status</th>
@@ -28,7 +28,7 @@
                         @foreach ($mutasi as $item)    
                             <tr>
                                 <td>{{$no}}</td>
-                                <td>{{$item->nip}}</td>
+                                {{-- <td>{{$item->nip}}</td> --}}
                                 <td>{{$item->nama}}</td>
                                 <td>{{$item->no_surat}}</td>
                                 <td>{{Carbon\carbon::parse($item->tgl_mutasi)->format('d-m-Y')}}</td>

@@ -39,11 +39,7 @@
                                 <td>{{$item->date}}</td>
                                 <td>{{$item->status_approval}}</td>
                                 <td>
-                                    @if ($item->reason_approval == null)
-                                        Proses
-                                    @else
-                                        {{$item->reason_approval}}
-                                    @endif
+                                    {{$item->reason_approval}}
                                 </td>
                             </tr>
                         <?php

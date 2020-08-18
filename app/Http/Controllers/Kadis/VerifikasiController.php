@@ -4,82 +4,63 @@ namespace App\Http\Controllers\Kadis;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\cuti;
+use App\mutasi;
+use Auth;
 
 class VerifikasiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Index Cuti
     public function index()
     {
-        return view('kadis.verifikasi.index');
+        $cuti = cuti::where('id_approval',Auth::user()->id)->get();
+        return view('kadis.verifikasi.cuti.index', compact('cuti'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    // Approve Cuti
+    public function cuti_approve(Request $request)
     {
-        //
+        $approve = cuti::find($request->id);
+        $approve->update([
+            'status_approval' => 'Approve'
+        ]);
+        return $approve;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    // Reject Cuti
+    public function cuti_reject(Request $request)
     {
-        //
+        $reject = cuti::find($request->id);
+        $reject->update([
+            'status_approval' => 'Reject'
+        ]);
+        return $reject;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    // Index Mutasi
+    public function mutasi()
     {
-        //
+        $mutasi = mutasi::all();
+        return view('kadis.verifikasi.mutasi.index', \compact('mutasi'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    // Approve Mutasi
+    public function mutasi_approve(Request $request)
     {
-        //
+        $approve = mutasi::find($request->id);
+        $approve->update([
+            'status' => 1
+        ]);
+        return $approve;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    // Approve Mutasi
+    public function mutasi_reject(Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $reject = mutasi::find($request->id);
+        $reject->update([
+            'status' => 2
+        ]);
+        return $reject;
     }
 }

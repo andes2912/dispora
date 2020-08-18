@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes(['register' => false]);
@@ -57,7 +57,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // KADIS
     // Verifikasi
-    Route::resource('verifikasi-kadis','Kadis\VerifikasiController');
+    Route::resource('verifikasi-cuti','Kadis\VerifikasiController');
+    
+    // Cuti
+    Route::get('cuti-approve','Kadis\VerifikasiController@cuti_approve');
+    Route::get('cuti-reject','Kadis\VerifikasiController@cuti_reject');
+
+    // Mutasi
+    Route::get('verifikasi-mutasi','Kadis\VerifikasiController@mutasi');
+    Route::get('mutasi-approve','Kadis\VerifikasiController@mutasi_approve');
+    Route::get('mutasi-reject','Kadis\VerifikasiController@mutasi_reject');
 
 // PEGAWAI
     // Absensi

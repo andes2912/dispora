@@ -23,7 +23,7 @@ class CreateCutisTable extends Migration
             $table->integer('id_approval')->nullable();
             $table->string('nama_approval')->nullable();
             $table->string('date_approval')->nullable();
-            $table->string('status_approval')->default('proses');
+            $table->string('status_approval')->default('Proses');
             $table->string('reason_approval')->nullable();
             $table->timestamps();
 

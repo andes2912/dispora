@@ -122,7 +122,6 @@
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    {{-- <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li> --}}
                                     <li>
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <form action="{{ route('logout') }}" method="POST">@csrf
@@ -164,13 +163,13 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
                         <li>
-                            <a href="{{url('/home')}}" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">Dashboard</span></a>
+                            <a href="{{url('/home')}}" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Dashboard</span></a>
                         </li>    
                         <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">Master Data</span></a>
+                            <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Verifikasi</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('verifikasi-kadis.index')}}">Verifikasi</a></li>
-                                {{-- <li><a href="">Monitoring</a></li> --}}
+                                <li><a href="{{route('verifikasi-cuti.index')}}">Cuti</a></li>
+                                <li><a href="{{url('verifikasi-mutasi')}}">Mutasi</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -338,6 +337,7 @@
     <script src="{{asset('assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
     <!-- This is data table -->
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
     <script type="text/javascript">
         $('#myTable').DataTable();
