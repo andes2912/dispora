@@ -1,4 +1,4 @@
-@extends('layouts.pegawai')
+@extends('layouts.admin')
 @section('title','Input Data Pensiun')
 @section('content')
    <div class="col-12">

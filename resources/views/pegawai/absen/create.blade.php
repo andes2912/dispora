@@ -1,4 +1,4 @@
-@extends('layouts.pegawai')
+@extends('layouts.admin')
 @section('title','Input Absen')
 @section('content')
    <div class="col-4">

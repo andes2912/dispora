@@ -1,4 +1,4 @@
-@extends('layouts.pegawai')
+@extends('layouts.admin')
 @section('title','Data Mutasi')
 @section('content')
 <div class="col-12">

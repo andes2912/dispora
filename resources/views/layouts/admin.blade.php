@@ -47,18 +47,18 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{url('/home')}}">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{asset('assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
+                            {{-- <img src="{{asset('assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" /> --}}
                             <!-- Light Logo icon -->
-                            <img src="{{asset('assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />
+                            {{-- <img src="{{asset('assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" /> --}}
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="{{asset('assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
+                         {{-- <img src="{{asset('assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" /> --}}
                          <!-- Light Logo text -->    
                          <img src="{{asset('assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" /></span> </a>
                 </div>
@@ -76,7 +76,7 @@
                         <!-- ============================================================== -->
                         <!-- Comment -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-message"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
@@ -118,14 +118,14 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                         <!-- ============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-email"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
@@ -167,14 +167,14 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-grid"></i></a>
+                        {{-- <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-grid"></i></a>
                             <div class="dropdown-menu animated slideInUp">
                                 <ul class="mega-dropdown-menu row">
                                     <li class="col-lg-3 col-xlg-2 m-b-30">
@@ -263,7 +263,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->
@@ -275,18 +275,18 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
+                        {{-- <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
                             <form class="app-search">
                                 <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
-                        </li>
+                        </li> --}}
                         
                         <!-- ============================================================== -->
                         <!-- Language -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                        </li>
+                        </li> --}}
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
@@ -298,18 +298,20 @@
                                         <div class="dw-user-box">
                                             <div class="u-img"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user"></div>
                                             <div class="u-text">
-                                                <h4>Steave Jobs</h4>
-                                                <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <h4>{{Auth::user()->name}}</h4>
+                                                <p class="text-muted">{{Auth::user()->email}}</p><a href="" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                         </div>
                                     </li>
-                                    <li role="separator" class="divider"></li>
                                     <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li role="separator" class="divider"></li>
                                     <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                    {{-- <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li> --}}
+                                    <li>
+                                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST">@csrf
+                                            </form>
+                                            <i class="fa fa-power-off"></i> Logout
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -331,13 +333,16 @@
                     <!-- User profile image -->
                     <div class="profile-img"> <img src="{{asset('assets/images/users/1.jpg')}}" alt="user" /> </div>
                     <!-- User profile text-->
-                    <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Markarn Doe <span class="caret"></span></a>
+                    <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{Auth::user()->name}} <span class="caret"></span></a>
                         <div class="dropdown-menu animated flipInY">
                             <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                            <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-                            <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
                             <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                            <div class="dropdown-divider"></div> <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                            <div class="dropdown-divider"></div>
+                             <a class="dropdown-item" data-toggle="tooltip" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">@csrf
+                                </form>
+                                <i class="fa fa-power-off"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -347,39 +352,58 @@
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">PERSONAL</li>
                         <li>
-                            <a href="{{url('/home')}}" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">Dashboard</span></a>
+                            <a href="{{url('/home')}}" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Dashboard</span></a>
                         </li>    
-                        <li>
-                            <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">Master Data</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{route('pegawai.index')}}">Pegawai</a></li>
-                                <li><a href="{{route('cuti.index')}}">Cuti</a></li>
-                                <li><a href="{{route('absen.index')}}">Absen</a></li>
-                                <li><a href="{{route('pangkat.index')}}">Pangkat</a></li>
-                                <li><a href="{{route('gaji.index')}}">Gaji</a></li>
-                                <li><a href="{{route('mutasi.index')}}">Mutasi</a></li>
-                                <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
-                            </ul>
-                        </li>
+                        @if (Auth::user()->role == 'Admin')
+                            <li>
+                                <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Master Data</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{route('pegawai.index')}}">Pegawai</a></li>
+                                    <li><a href="{{route('cuti.index')}}">Cuti</a></li>
+                                    <li><a href="{{route('absen.index')}}">Absen</a></li>
+                                    <li><a href="{{route('pangkat.index')}}">Pangkat</a></li>
+                                    <li><a href="{{route('gaji.index')}}">Gaji</a></li>
+                                    <li><a href="{{route('mutasi.index')}}">Mutasi</a></li>
+                                    <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
+                                </ul>
+                            </li>
+                        @elseif(Auth::user()->role == 'Kadis')
+                            <li>
+                                <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Verifikasi</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{route('verifikasi-cuti.index')}}">Cuti</a></li>
+                                    <li><a href="{{url('verifikasi-mutasi')}}">Mutasi</a></li>
+                                </ul>
+                            </li>
+                        @elseif(Auth::user()->role == 'Pegawai')
+                            <li>
+                                <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Master Data</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{route('cuti-pegawai.index')}}">Cuti</a></li>
+                                    <li><a href="{{route('absensi.index')}}">Absen</a></li>
+                                    <li><a href="{{route('mutasi-pegawai.index')}}">Mutasi</a></li>
+                                    <li><a href="{{route('pensiun-pegawai.index')}}">Pensiun</a></li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
             <!-- Bottom points-->
-            <div class="sidebar-footer">
+            {{-- <div class="sidebar-footer">
                 <!-- item-->
                 <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
                 <!-- item-->
                 <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
                 <!-- item-->
-                {{-- <a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a> --}}
                 <a class="nav-link" data-toggle="tooltip" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
                     </form>
                     <i class="mdi mdi-power"></i>
                 </a>
-            </div>
+            </div> --}}
             <!-- End Bottom points-->
         </aside>
         <!-- ============================================================== -->
@@ -392,7 +416,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="row page-titles">
+            {{-- <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-themecolor">Starter kit</h3>
                 </div>
@@ -406,7 +430,7 @@
                 <div>
                     <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
                 </div>
-            </div>
+            </div> --}}
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -427,7 +451,7 @@
                 <!-- Right sidebar -->
                 <!-- ============================================================== -->
                 <!-- .right-sidebar -->
-                <div class="right-sidebar">
+                {{-- <div class="right-sidebar">
                     <div class="slimscrollright">
                         <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
                         <div class="r-panel-body">
@@ -476,7 +500,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- ============================================================== -->
                 <!-- End Right sidebar -->
                 <!-- ============================================================== -->
@@ -488,7 +512,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2017 Admin Press Admin by themedesigner.in
+                {{-- © 2017 Admin Press Admin by themedesigner.in --}}
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

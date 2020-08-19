@@ -1,4 +1,4 @@
-@extends('layouts.kadis')
+@extends('layouts.admin')
 @section('title','Verifikasi Data Cuti')
 @section('content')
 <div class="col-12">
