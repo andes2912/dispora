@@ -362,7 +362,7 @@
                                     <li><a href="{{route('cuti.index')}}">Cuti</a></li>
                                     <li><a href="{{route('absen.index')}}">Absen</a></li>
                                     <li><a href="{{route('pangkat.index')}}">Pangkat</a></li>
-                                    <li><a href="{{route('gaji.index')}}">Gaji</a></li>
+                                    {{-- <li><a href="{{route('gaji.index')}}">Gaji</a></li> --}}
                                     <li><a href="{{route('mutasi.index')}}">Mutasi</a></li>
                                     <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
                                 </ul>
@@ -430,7 +430,7 @@
                 <div>
                     <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
                 </div>
-            </div> --}}
+            </div> --}} <br>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
