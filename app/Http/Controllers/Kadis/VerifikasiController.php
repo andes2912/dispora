@@ -13,7 +13,7 @@ class VerifikasiController extends Controller
     // Index Cuti
     public function index()
     {
-        $cuti = cuti::where('id_approval',Auth::user()->id)->get();
+        $cuti = cuti::where('id_approval',Auth::user()->id)->orderBy('id','DESC')->get();
         return view('kadis.verifikasi.cuti.index', compact('cuti'));
     }
 

@@ -59,7 +59,8 @@
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"> Submit</i></button>
+                        <a href="{{url('pangkat')}}" class="btn btn-warning btn-sm"> <i class="fa fa-close"> Cancel</i> </a>
                     </div>
                 </form>
            </div>

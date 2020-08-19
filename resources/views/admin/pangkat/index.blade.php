@@ -18,7 +18,7 @@
                             <th>Jabatan</th>
                             <th>Golongan</th>
                             <th>Kelas</th>
-                            <th>Kedudukan</th>
+                            {{-- <th>Kedudukan</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,7 +30,7 @@
                                 <td>{{$item->jabatan}}</td>
                                 <td>{{$item->golongan}}</td>
                                 <td>{{$item->kelas}}</td>
-                                <td>{{$item->kedudukan}}</td>
+                                {{-- <td>{{$item->kedudukan}}</td> --}}
                                 <td>
                                     <a href="{{route('pangkat.edit', $item->id)}}" class="btn btn-warning btn-sm">Edit</a>
                                     <a href="" class="btn btn-danger btn-sm">Delete</a>

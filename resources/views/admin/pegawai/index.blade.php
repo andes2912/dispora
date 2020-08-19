@@ -14,7 +14,6 @@
                             <th>NIP</th>
                             <th>Nama</th>
                             <th>NIK</th>
-                            <th>Alamat</th>
                             <th>Agama</th>
                             <th>Kelamin</th>
                             <th>Action</th>
@@ -26,7 +25,6 @@
                                 <td><a href="{{route('pegawai.show', $item->id)}}">{{$item->nip}}</a></td>
                                 <td>{{$item->nama}}</td>
                                 <td>{{$item->nik}}</td>
-                                <td>{{$item->alamat}}</td>
                                 <td>{{$item->agama}}</td>
                                 <td>{{$item->kelamin}}</td>
                                 <td>

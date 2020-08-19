@@ -18,6 +18,7 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{asset('assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">
+    <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -56,11 +57,13 @@
                             {{-- <img src="{{asset('assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" /> --}}
                         </b>
                         <!--End Logo icon -->
-                        <!-- Logo text --><span>
+                        <!-- Logo text --><span style="font-weight: bold">
                          <!-- dark Logo text -->
                          {{-- <img src="{{asset('assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" /> --}}
                          <!-- Light Logo text -->    
-                         <img src="{{asset('assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" /></span> </a>
+                         <img src="{{asset('assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" />
+                         DISPORA</span> </a>
+                         
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -551,6 +554,8 @@
     <!-- This is data table -->
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/morrisjs/morris.min.js')}}"></script>
+    <script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
     <script type="text/javascript">
         $('#myTable').DataTable();
         $(".select2").select2();

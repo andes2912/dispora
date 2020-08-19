@@ -35,7 +35,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label">Tanggal Cuti</label>
-                                        <input type="date" name="add_date[0][date_leave]" class="form-control border-primary">
+                                        <input type="date" name="add_date[0][date_leave]" class="form-control border-primary" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-1">
@@ -50,13 +50,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="control-label">Alasan</label>
-                                    <textarea name="reason" rows="3" class="form-control border-primary"></textarea>
+                                    <textarea name="reason" rows="3" class="form-control border-primary" required></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="control-label">Mengetahui</label>
-                                    <select name="id_approval" id="id" class="form-control">
+                                    <select name="id_approval" id="id" class="form-control" required>
                                         <option value="">Select</option>
                                         @foreach ($approval as $item)
                                             <option value="{{$item->id}}">{{$item->name}}</option>

@@ -36,7 +36,7 @@
                                 <td>{{$item->date}}</td>
                                 <td>{{$item->status_approval}}</td>
                                 <td>
-                                    @if ($item->status_approve == 'Proses')
+                                    @if ($item->status_approval == 'Proses')
                                         <button type="submit" id="approve_cuti" data-id-approve-cuti="{{$item->id}}" class="btn btn-info btn-sm">
                                             <i class="fa fa-check"></i>
                                         </button>

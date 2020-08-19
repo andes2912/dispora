@@ -73,7 +73,7 @@ class CutiPegawaiController extends Controller
                 // dd($cuti,$cuti_date,$cuti_count);
                 $cuti_count->Save();
             } else {
-                $cuti_update = cuti_count::where('id_pegawai',auth::user()->id)->first();
+                $cuti_update = cuti_count::where('nip',auth::user()->nip)->first();
                 $cuti_update->taken = $count->count();
                 $cuti_update->sisa =  $cuti_update->sisa - $cuti_update->taken;
                 $cuti_update->batas = 6;
