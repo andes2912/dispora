@@ -22,6 +22,7 @@
                                     </select>
                                 </div>
                             </div>
+                            <span id="select-id-pegawai" hidden></span>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">Nama</label>
@@ -31,7 +32,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">Jabatan</label>
-                                    <input type="text" name="jabatan" class="form-control" required>
+                                    <input type="text" name="jabatan" class="form-control" required autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -62,14 +63,15 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">Kedudukan</label>
-                                    <input type="text" name="kedudukan" class="form-control" required>
+                                    <input type="text" name="kedudukan" class="form-control" required autocomplete="off">
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="{{url('pangkat')}}" class="btn btn-inverse">Cancel</a>
                     </div>
                 </form>
            </div>
@@ -78,6 +80,7 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+        // NAMA PEGAWAI 
         $(document).ready(function() {
             var nip = $("#nip").val();
                 $.get('{{ Url("select-nama-pangkat") }}',{'_token': $('meta[name=csrf-token]').attr('content'),nip:nip}, function(resp){  
@@ -89,6 +92,21 @@
             var nip = $(this).val();
             $.get('{{ Url("select-nama-pangkat") }}',{'_token': $('meta[name=csrf-token]').attr('content'),nip:nip}, function(resp){  
                 $("#select-nama-pangkat").html(resp);
+            });
+        });
+
+        // ID PEGAWAI
+        $(document).ready(function() {
+            var nip = $("#nip").val();
+                $.get('{{ Url("select-id-pegawai") }}',{'_token': $('meta[name=csrf-token]').attr('content'),nip:nip}, function(resp){  
+                    $("#select-id-pegawai").html(resp);
+                });
+        }); 
+
+        $(document).on('change', '#nip', function (e) { 
+            var nip = $(this).val();
+            $.get('{{ Url("select-id-pegawai") }}',{'_token': $('meta[name=csrf-token]').attr('content'),nip:nip}, function(resp){  
+                $("#select-id-pegawai").html(resp);
             });
         });
     </script>

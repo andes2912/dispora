@@ -6,7 +6,7 @@
         <div class="card-body">
             <h4 class="card-title">Data Absensi
                 @if (@$cekabsen->tgl != $date)
-                    <a href="{{route('absensi.create')}}" class="btn btn-info btn-sm">Absen</a>
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#absense">Absen</button>
                 @endif
             </h4>
             <h6 class="card-subtitle">Data table example</h6>
@@ -45,6 +45,36 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
+<div class="modal fade" id="absense" tabindex="-1" role="dialog" aria-labelledby="absense">
+    <div class="modal-dialog" role="document">
+       <form action="{{route('absensi.store')}}" method="post">
+           @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="absense">Input Absensi</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="new-password" class="control-label">Status Kehadiran :</label>
+                            <select name="status" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="Hadir">hadir</option>
+                                <option value="Izin">Izin</option>
+                                <option value="Sakit">Sakit</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+       </form>
     </div>
 </div>
 @endsection

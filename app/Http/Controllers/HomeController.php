@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\{Pegawai,User};
 use Auth;
 
 class HomeController extends Controller
@@ -26,7 +27,19 @@ class HomeController extends Controller
     {
         if (auth()->check()) {
             if (auth::user()->role == "Admin") {
-                return view('admin.home');
+                // Total Pegawai
+                $total = User::whereIn('role',['Pegawai','Kadis'])->count();
+
+                // Pegawai Laki
+                $laki = Pegawai::where('kelamin','Laki-laki')->count();
+
+                // Pegawai Perempuan
+                $ladies = Pegawai::where('kelamin','Perempuan')->count();
+
+                // Pegawai Aktif
+                $aktif = User::where('status','Aktif')->whereIn('role',['Kadis','Pegawai'])->count();
+
+                return view('admin.home', compact('total','laki','ladies','aktif'));
             } elseif(auth::user()->role == "Pegawai") {
                 return view('pegawai.home');
             } elseif(auth::user()->role == "Kadis") {

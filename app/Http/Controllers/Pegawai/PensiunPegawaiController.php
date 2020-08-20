@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pegawai;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\{user, pensiun};
+use Auth;
 
 class PensiunPegawaiController extends Controller
 {
@@ -15,7 +16,8 @@ class PensiunPegawaiController extends Controller
      */
     public function index()
     {
-        return view('pegawai.pensiun.index');
+        $pensiun = pensiun::where('nip', Auth::user()->nip)->get();
+        return view('pegawai.pensiun.index', compact('pensiun'));
     }
 
     /**
@@ -37,15 +39,13 @@ class PensiunPegawaiController extends Controller
     public function store(Request $request)
     {
         $pensiun = new pensiun;
-        $pensiun->id_pangkat = $request->id_pangkat;
+        $pensiun->pangkat_id = $request->pangkat_id;
         $pensiun->nip = $request->nip;
         $pensiun->nama = $request->nama;
         $pensiun->date_pensiun = $request->date_pensiun;
         $pensiun->golongan = $request->golongan;
         $pensiun->kelas = $request->kelas;
         $pensiun->kedudukan = $request->kedudukan;
-        $pensiun->gaji = $request->gaji;
-        $pensiun->tunjangan = $request->tunjangan;
 
         if ($pensiun->save()) {
             $user = User::where('nip', $pensiun->nip)->first();
@@ -54,7 +54,7 @@ class PensiunPegawaiController extends Controller
             // dd($pensiun, $user);
         }
 
-        return redirect()->route('pensiun-pegawi');
+        return redirect('pensiun-pegawai');
     }
 
     /**

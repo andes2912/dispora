@@ -15,7 +15,7 @@ class CreateCutisTable extends Migration
     {
         Schema::create('cutis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('user_id');
             $table->string('nip');
             $table->string('nama');
             $table->string('date');
@@ -24,10 +24,9 @@ class CreateCutisTable extends Migration
             $table->string('nama_approval')->nullable();
             $table->string('date_approval')->nullable();
             $table->string('status_approval')->default('Proses');
-            $table->string('reason_approval')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

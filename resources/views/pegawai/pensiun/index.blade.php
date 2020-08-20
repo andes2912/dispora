@@ -16,11 +16,22 @@
                             <th>Nama</th>
                             <th>TGL Pensiun</th>
                             <th>Golongan</th>
-                            <th>Gaji</th>
-                            <th>Tunjangan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        @foreach ($pensiun as $item)
+                            <tr>
+                                <td>{{$item->nip}}</td>
+                                <td>{{$item->nama}}</td>
+                                <td>{{$item->date_pensiun}}</td>
+                                <td>{{$item->golongan}}</td>
+                                <td>
+                                    <a href="{{url('akun', Auth::user()->pegawai->id)}}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>

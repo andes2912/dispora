@@ -1,30 +1,34 @@
 @extends('layouts.admin')
-@section('title','Data Pegawai')
+@section('title','Data Kadis')
 @section('content')
 <div class="col-12">
     <div class="card">
-        
         <div class="card-body">
-            <h4 class="card-title">Data Pegawai <a href="{{route('pegawai.create')}}" class="btn btn-primary btn-sm">Tambah</a></h4>
-            <h6 class="card-subtitle">Data table example</h6>
+            <h4 class="card-title">Data Kadis 
+                @if ($cek_kadis == NULL)
+                    <a href="{{url('create-kadis')}}" class="btn btn-primary btn-sm">Tambah</a>
+                @endif
+            </h4>
             <div class="table-responsive m-t-40">
                 <table id="myTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>NIP</th>
                             <th>Nama</th>
+                            <th>NIK</th>
+                            <th>Agama</th>
                             <th>Kelamin</th>
-                            <th>Jabatan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pegawai as $item)
+                        @foreach ($kadis as $item)
                             <tr>
                                 <td><a href="{{route('pegawai.show', $item->user_id)}}">{{$item->nip}}</a></td>
                                 <td>{{$item->nama}}</td>
+                                <td>{{$item->nik}}</td>
+                                <td>{{$item->agama}}</td>
                                 <td>{{$item->kelamin}}</td>
-                                <td>{{$item->pangkat->jabatan ?? '' }}</td>
                                 <td>
                                     @php
                                         $pangkat = App\pangkat::where('user_id', $item->user_id)->first();

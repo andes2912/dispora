@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-@section('title','Tambah Data Pegawai')
+@section('title','Tambah Data Kadis')
 @section('content')
 <div class="col-12">
     <div class="card card-outline-info">
         <div class="card-header">
-            <h4 class="m-b-0 text-white">Informasi Data Pegawai</h4>
+            <h4 class="m-b-0 text-white">Informasi Data Kadis</h4>
         </div>
         <div class="card-body">
             <form action="{{route('pegawai.store')}}" method="POST" enctype="multipart/form-data">
@@ -13,7 +13,7 @@
                     <div class="row p-t-20">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Nama Pegawai</label>
+                                <label class="control-label">Nama Kadis</label>
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Nama" required autocomplete="off">
                             </div>
                         </div>
@@ -48,14 +48,14 @@
                                 <input type="text" name="tipepns" id="tipepns" class="form-control" placeholder="Honorer" required autocomplete="off">
                             </div>
                         </div>
-                        <input type="hidden" name="role" value="Pegawai">
+                        <input type="hidden" name="role" value="Kadis">
                         <!--/span-->
                     </div>
                     <!--/row-->
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
-                    <button type="button" class="btn btn-inverse">Cancel</button>
+                    <a href="{{url('index-kadis')}}" class="btn btn-inverse">Cancel</a>
                 </div>
             </form>
         </div>

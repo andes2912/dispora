@@ -6,20 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pegawai extends Model
 {
+    protected $table = "pegawais";
     protected $guarded = [];
-
-    // public function User()
-    // {
-    //     return $this->belongsTo('App\User', 'id_user');
-    // }
 
     public function pangkat()
     {
-        return $this->hasOne('App\pangkat','id_user');
+        return $this->belongsTo(pangkat::class);
     }
 
-    public function user()
+    public function User()
     {
-        return $this->hasOne('App\User','id');
+        return $this->belongsTo('App\User','id');
     }
 }

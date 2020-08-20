@@ -20,7 +20,7 @@ class PangkatController extends Controller
 
     public function create()
     {
-        $pegawai = Pegawai::where('id_pangkat', null)->get();
+        $pegawai = Pegawai::where('pangkat_id', null)->get();
         return view('admin.pangkat.create', compact('pegawai'));
     }
 
@@ -29,7 +29,7 @@ class PangkatController extends Controller
     {
         $pangkat = new pangkat;
         $pangkat->id = $request->id;
-        $pangkat->id_user = auth::user()->id;
+        $pangkat->user_id = $request->user_id;
         $pangkat->nip = $request->nip;
         $pangkat->nama = $request->nama;
         $pangkat->jabatan = $request->jabatan;
@@ -39,7 +39,7 @@ class PangkatController extends Controller
         
         if ($pangkat->save()) {
             $pegawai = pegawai::where('nip', $pangkat->nip)->first();
-            $pegawai->id_pangkat = $pangkat->id;
+            $pegawai->pangkat_id = $pangkat->id;
             $pegawai->save();
         }
 
@@ -77,12 +77,30 @@ class PangkatController extends Controller
         //
     }
 
+    // Select ID Pegawai
+    public function select_id_pegawai(Request $request)
+    {
+        $id_pegawai = pegawai::SelectRaw('pegawais.nip,pegawais.user_id,a.name')
+            ->leftJoin('Users as a','a.id','=','pegawais.user_id')
+            ->where('pegawais.nip', $request->nip)
+            ->get();
+
+            $select = '';
+            $select .= '
+                        <select class="form-control" name="user_id">
+                        ';
+                        foreach ($id_pegawai as $pegawai) {
+            $select .= '<option value="'.$pegawai->user_id.'">'.$pegawai->user_id.'</option>';
+                        }'
+                        </select>';
+            return $select;
+    }
+
     // Select Nama Pegawai
     public function select_nama_pangkat(Request $request)
     {
-        $nama_pangkat = pegawai::SelectRaw('pegawais.nip,pegawais.id_user,a.name')
-            ->leftJoin('Users as a','a.id','=','pegawais.id_user')
-            ->where('role','pegawai')
+        $nama_pangkat = pegawai::SelectRaw('pegawais.nip,pegawais.user_id,a.name')
+            ->leftJoin('Users as a','a.id','=','pegawais.user_id')
             ->where('pegawais.nip', $request->nip)
             ->get();
 

@@ -42,11 +42,11 @@
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" action="{{route('login')}}" method="POST">
                         @csrf
-                        <h3 class="box-title m-b-20">Masuk</h3>
+                        <h3 class="box-title m-b-20">LOGIN </h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control @error('email') is-invalid @enderror value="{{ old('email') }} type="email" name="email" placeholder="E-mail" required> 
-                                @error('email')
+                                <input class="form-control @error('nip') is-invalid @enderror value="{{ old('nip') ?: old('nip') }} type="text" name="nip" placeholder="NIP or E-mail" required> 
+                                @error('nip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -66,7 +66,7 @@
                      
                         <div class="form-group text-center m-t-20">
                             <div class="col-xs-12">
-                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Masuk</button>
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">SIGN</button>
                             </div>
                         </div>
                     </form>

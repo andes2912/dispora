@@ -19,8 +19,8 @@ class AbsenPegawaiController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai") {
-                $cek = Pegawai::where('id_user',auth::user()->id)->first();
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+                $cek = Pegawai::where('user_id',auth::user()->id)->first();
                 $cekabsen = Absen::where('id_pegawai',$cek->id)->first();
                 $absen = Absen::where('id_pegawai',$cek->id)->get();
                 $date = Carbon::now()->format('d-m-Y');
@@ -43,7 +43,7 @@ class AbsenPegawaiController extends Controller
     public function create()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai") {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
                 return view('pegawai.absen.create');
             } else {
                 return redirect('home');
@@ -62,8 +62,8 @@ class AbsenPegawaiController extends Controller
     public function store(Request $request)
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai") {
-                $cek = Pegawai::where('id_user',auth::user()->id)->first();
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+                $cek = Pegawai::where('user_id',auth::user()->id)->first();
                 $absen = New Absen;
                 $absen->id_pegawai = $cek->id;
                 $absen->nip = $cek->nip;
@@ -76,6 +76,8 @@ class AbsenPegawaiController extends Controller
 
                 return redirect('absensi');
             }
+        }else {
+            return redirect('home');
         }
     }
 

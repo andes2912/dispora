@@ -42,7 +42,7 @@ class MutasiController extends Controller
     public function store(Request $request)
     {
         $mutasi = new mutasi;
-        $mutasi->id_pangkat = $request->id_pangkat;
+        $mutasi->pangkat_id = $request->pangkat_id;
         $mutasi->nip = $request->nip;
         $mutasi->nama = $request->nama;
         $mutasi->no_surat = $request->no_surat;
@@ -53,7 +53,7 @@ class MutasiController extends Controller
         $mutasi->jabatan_baru = $request->jabatan_baru;
 
         if ($mutasi->save()) {
-            $pangkat = pangkat::where('id', $mutasi->id_pangkat)->first();
+            $pangkat = pangkat::where('id', $mutasi->pangkat_id)->first();
             $pangkat->jabatan = $mutasi->jabatan_baru;
             $pangkat->Save();
         }
@@ -108,7 +108,7 @@ class MutasiController extends Controller
     // Select Nama Pegawai
     public function select_nama_mutasi(Request $request)
     {
-        $nama_mutasi = pangkat::SelectRaw('pangkats.nip,pangkats.id_user,pangkats.nama')
+        $nama_mutasi = pangkat::SelectRaw('pangkats.nip,pangkats.user_id,pangkats.nama')
             ->where('pangkats.nip', $request->nip)
             ->get();
 
@@ -151,7 +151,7 @@ class MutasiController extends Controller
 
         $select = '';
         $select .= '
-                    <select class="form-control" name="id_pangkat">
+                    <select class="form-control" name="pangkat_id">
                     ';
                     foreach ($id_mutasi as $mutasi) {
         $select .= '<option value="'.$mutasi->id.'">'.$mutasi->id.'</option>';

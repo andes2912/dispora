@@ -7,7 +7,7 @@
             <h4 class="m-b-0 text-white">Informasi Data Pegawai</h4>
         </div>
         <div class="card-body">
-            <form action="{{route('pegawai.update', $edit->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('akun.update', Auth::user()->pegawai->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-body">
@@ -15,14 +15,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Nama Pegawai</label>
-                                <input type="text" name="nama" id="nama" class="form-control" value="{{$edit->nama}}" >
+                                <input type="text" name="nama" id="nama" class="form-control" value="{{Auth::user()->name}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" value="{{$edit->email}}">
+                                <input type="email" name="email" id="email" class="form-control" value="{{Auth::user()->email}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
@@ -33,14 +33,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Nomor Induk Pegawai (NIP)</label>
-                                <input type="text" name="nip" id="nip" class="form-control" value="{{$edit->nip}}">
+                                <input type="text" name="nip" id="nip" class="form-control" value="{{Auth::user()->nip}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Tipe PNS</label>
-                                <input type="text" name="tipepns" id="tipepns" class="form-control" value="{{$edit->tipepns}}">
+                                <input type="text" name="tipepns" id="tipepns" class="form-control" value="{{Auth::user()->pegawai->tipepns}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
@@ -50,14 +50,14 @@
                         <div class="col-md-6">
                             <div class="form-group has-success">
                                 <label class="control-label">Status</label>
-                                <input type="text" value="Aktif" class="form-control" value="{{$edit->status}}">
+                                <input type="text" value="Aktif" class="form-control" value="{{Auth::user()->status}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Tanggal Lahir</label>
-                                <input type="date" name="ttl" class="form-control" value="{{$edit->ttl}}">
+                                <input type="text" name="ttl" class="form-control datepicker" value="{{Auth::user()->pegawai->ttl}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
@@ -67,13 +67,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tempat Lahir</label>
-                                <textarea name="tempatlahir" class="form-control" rows="4">{{$edit->tempatlahir}}</textarea>
+                                <textarea name="tempatlahir" class="form-control" rows="4">{{Auth::user()->pegawai->tempatlahir}}</textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Alamat Saat Ini</label>
-                                <textarea name="alamat" class="form-control" rows="4">{{$edit->alamat}}</textarea>
+                                <textarea name="alamat" class="form-control" rows="4">{{Auth::user()->pegawai->alamat}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -83,14 +83,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nomor NPWP</label>
-                                <input type="text" name="nonpwp" class="form-control" value="{{$edit->nonpwp}}">
+                                <input type="number" name="nonpwp" class="form-control" value="{{Auth::user()->pegawai->nonpwp}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nomor Induk Keluarga</label>
-                                <input type="number" name="nik" class="form-control" value="{{$edit->nik}}">
+                                <input type="number" name="nik" class="form-control" value="{{Auth::user()->pegawai->nik}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
@@ -102,19 +102,19 @@
                             <div class="form-group">
                                 <label class="control-label">Jenis Kelamin</label>
                                 <select class="form-control custom-select" name="kelamin" data-placeholder="Choose a Category" tabindex="1">
-                                    <option value="Laki-Laki" {{$edit->kelamin == 'Laki-laki' ? 'selected' : ''}} >Laki-Laki</option>
-                                    <option value="Perempuan" {{$edit->kelamin == 'Perempuan' ? 'selected' : ''}}>Perempuan</option>
+                                    <option value="Laki-Laki">Laki-Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Agama</label>
-                                <select class="form-control custom-select" name="agama" data-placeholder="Choose a Category">
-                                    <option value="Islam" {{$edit->agama == 'Islam' ? 'selected' : ''}} >Islam</option>
-                                    <option value="Kristen" {{$edit->agama == 'Kristen' ? 'selected' : ''}}>Kristen</option>
-                                    <option value="Budha" {{$edit->agama == 'Budha' ? 'selected' : ''}}>Budha</option>
-                                    <option value="Hindu" {{$edit->agama == 'Hindu' ? 'selected' : ''}}>Hindu</option>
+                                <select class="form-control custom-select" name="agama" data-placeholder="Choose a Category" tabindex="1">
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Budha">Budha</option>
+                                    <option value="Hindu">Hindu</option>
                                 </select>
                             </div>
                         </div>
@@ -126,9 +126,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Status</label>
-                                <select class="form-control custom-select" name="statusnikah" data-placeholder="Choose a Category">
-                                    <option value="Menikah" {{$edit->statusnikah == 'Menikah' ? 'selected' : ''}} >Menikah</option>
-                                    <option value="Lajang" {{$edit->statusnikah == 'Lajang' ? 'selected' : ''}} >Lajang</option>
+                                <select class="form-control custom-select" name="statusnikah" data-placeholder="Choose a Category" tabindex="1">
+                                    <option value="Menikah">Menikah</option>
+                                    <option value="Lajang">Lajang</option>
                                 </select>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Kedudukan</label>
-                               <input type="text" name="kedudukanpns" class="form-control" value="{{$edit->kedudukanpns}}">
+                               <input type="text" name="kedudukanpns" class="form-control" value="{{Auth::user()->pegawai->kedudukanpns}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
@@ -147,14 +147,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Gol. Darah</label>
-                                <input type="text" name="goldarah" class="form-control" value="{{$edit->goldarah}}">
+                                <input type="text" name="goldarah" class="form-control" value="{{Auth::user()->pegawai->goldarah}}" autocomplete="off">
                             </div>
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Foto Pegawai</label>
-                                @if ($edit->foto == NULL)
+                                @if (Auth::user()->pegawai->foto == NULL)
                                     <input type="file" name="foto" class="form-control">
                                 @endif
                             </div>
@@ -170,4 +170,12 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+        $(".datepicker").datepicker( {
+            todayHighlight: !0, 
+            orientation: "bottom left",
+        })
+    </script>
 @endsection

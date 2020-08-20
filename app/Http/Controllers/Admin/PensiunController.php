@@ -42,7 +42,7 @@ class PensiunController extends Controller
     public function store(Request $request)
     {
         $pensiun = new pensiun;
-        $pensiun->id_pangkat = $request->id_pangkat;
+        $pensiun->pangkat_id = $request->pangkat_id;
         $pensiun->nip = $request->nip;
         $pensiun->nama = $request->nama;
         $pensiun->date_pensiun = $request->date_pensiun;
@@ -107,15 +107,15 @@ class PensiunController extends Controller
     // Select ID
     public function select_id_pensiun(Request $request)
     {
-        $id_pangkat = pangkat::SelectRaw('pangkats.nip,pangkats.id')
+        $pangkat_id = pangkat::SelectRaw('pangkats.nip,pangkats.id')
             ->where('pangkats.nip', $request->nip)
             ->get();
 
             $select = '';
             $select .= '
-                        <select class="form-control" name="id_pangkat">
+                        <select class="form-control" name="pangkat_id">
                         ';
-                        foreach ($id_pangkat as $pangkat) {
+                        foreach ($pangkat_id as $pangkat) {
             $select .= '<option value="'.$pangkat->id.'">'.$pangkat->id.'</option>';
                         }'
                         </select>';

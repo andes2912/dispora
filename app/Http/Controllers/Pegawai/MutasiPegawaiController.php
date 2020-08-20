@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Pegawai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\mutasi;
-use App\pangkat;
+use App\{mutasi,pangkat,User};
 use Auth;
 
 class MutasiPegawaiController extends Controller
@@ -18,7 +17,8 @@ class MutasiPegawaiController extends Controller
     public function index()
     {
         $mutasi = mutasi::where('nip',Auth::user()->nip)->orderBy('id','DESC')->get();
-        return view('pegawai.mutasi.index', compact('mutasi'));
+        $cek_mutasi = mutasi::where('nip',Auth::user()->nip)->orderBy('id','DESC')->first();
+        return view('pegawai.mutasi.index', compact('mutasi','cek_mutasi'));
     }
 
     /**
@@ -28,7 +28,8 @@ class MutasiPegawaiController extends Controller
      */
     public function create()
     {
-        return view('pegawai.mutasi.create');
+        $cek_kadis = User::where('role','Kadis')->first();
+        return view('pegawai.mutasi.create', compact('cek_kadis'));
         
     }
 
@@ -41,7 +42,7 @@ class MutasiPegawaiController extends Controller
     public function store(Request $request)
     {
         $mutasi = new mutasi;
-        $mutasi->id_pangkat = $request->id_pangkat;
+        $mutasi->pangkat_id = $request->pangkat_id;
         $mutasi->nip = Auth::user()->nip;
         $mutasi->nama = Auth::user()->name;
         $mutasi->no_surat = $request->no_surat;
@@ -129,7 +130,7 @@ class MutasiPegawaiController extends Controller
 
         $select = '';
         $select .= '
-                    <select class="form-control" name="id_pangkat">
+                    <select class="form-control" name="pangkat_id">
                     ';
                     foreach ($id_mutasi as $mutasi) {
         $select .= '<option value="'.$mutasi->id.'">'.$mutasi->id.'</option>';

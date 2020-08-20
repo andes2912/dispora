@@ -15,7 +15,7 @@ class CreateMutasisTable extends Migration
     {
         Schema::create('mutasis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pangkat');
+            $table->unsignedBigInteger('pangkat_id');
             $table->string('nip');
             $table->string('nama');
             $table->string('no_surat');
@@ -27,7 +27,7 @@ class CreateMutasisTable extends Migration
             $table->integer('status');
             $table->timestamps();
 
-            $table->foreign('id_pangkat')->references('id')->on('pangkats')->onDelete('cascade');
+            $table->foreign('pangkat_id')->references('id')->on('pangkats')->onDelete('cascade');
         });
     }
 

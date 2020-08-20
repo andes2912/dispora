@@ -37,7 +37,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">No. Surat</label>
-                                    <input type="text" name="no_surat" class="form-control" required>
+                                    <input type="text" name="no_surat" class="form-control" required autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -55,20 +55,20 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">Jabatan Baru</label>
-                                    <input type="text" name="jabatan_baru" class="form-control" required>
+                                    <input type="text" name="jabatan_baru" class="form-control" required autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">TGL Mutasi</label>
-                                    <input type="date" name="tgl_mutasi" class="form-control" required>
+                                    <input type="date" name="tgl_mutasi" class="form-control" required autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">TGL Masuk</label>
-                                    <input type="date" name="tgl_masuk" class="form-control" required>
+                                    <input type="date" name="tgl_masuk" class="form-control" required autocomplete="off">
                                 </div>
                             </div>
                         </div>

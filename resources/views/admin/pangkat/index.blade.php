@@ -25,7 +25,9 @@
                     <tbody>
                         @foreach ($pangkat as $item)
                             <tr>
-                                <td>{{$item->nip}}</td>
+                                <td>
+                                    <a href="{{url('pegawai', $item->pegawai->user_id)}}">{{$item->nip}}</a>
+                                </td>
                                 <td>{{$item->nama}}</td>
                                 <td>{{$item->jabatan}}</td>
                                 <td>{{$item->golongan}}</td>

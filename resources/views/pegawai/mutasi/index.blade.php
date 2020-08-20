@@ -5,7 +5,9 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Data Mutasi 
-                <a href="{{route('mutasi-pegawai.create')}}" class="btn btn-info btn-sm">Ajukan Mutasi</a>
+                @if ($cek_mutasi->status !== 0)
+                    <a href="{{route('mutasi-pegawai.create')}}" class="btn btn-info btn-sm">Ajukan Mutasi</a>  
+                @endif
             </h4>
             <h6 class="card-subtitle">Data table example</h6>
             <div class="table-responsive m-t-40">

@@ -15,31 +15,30 @@ class CreatePegawaisTable extends Migration
     {
         Schema::create('pegawais', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->UnsignedBigInteger('id_user');
+            $table->UnsignedBigInteger('user_id');
             $table->string('nip');
             $table->string('tipepns');
             $table->integer('nipbaru')->nullable();
             $table->string('nama');
-            $table->string('ttl');
-            $table->string('tempatlahir');
-            $table->string('kelamin');
-            $table->string('agama');
-            $table->string('statusnikah');
-            $table->string('kedudukanpns');
-            $table->string('goldarah');
-            $table->string('alamat');
-            $table->string('nokarpeg')->nullable();;
-            $table->string('noaskes')->nullable();;
-            $table->string('notaspen')->nullable();;
-            $table->string('nonpwp');
-            $table->string('nokarsuskaris')->nullable();;
-            $table->string('nik');
-            $table->string('foto');
-            $table->integer('id_pangkat')->nullable();
-            $table->integer('id_gaji')->nullable();
+            $table->string('ttl')->nullable();
+            $table->string('tempatlahir')->nullable();
+            $table->string('kelamin')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('statusnikah')->nullable();
+            $table->string('kedudukanpns')->nullable();
+            $table->string('goldarah')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('nokarpeg')->nullable();
+            $table->string('noaskes')->nullable();
+            $table->string('notaspen')->nullable();
+            $table->string('nonpwp')->nullable();
+            $table->string('nokarsuskaris')->nullable();
+            $table->string('nik')->nullable();
+            $table->string('foto')->nullable();
+            $table->integer('pangkat_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

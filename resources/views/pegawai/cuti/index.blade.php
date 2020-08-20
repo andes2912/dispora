@@ -5,7 +5,9 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Data Cuti 
-                <a href="{{route('cuti-pegawai.create')}}" class="btn btn-info btn-sm">Ajukan Cuti</a>
+                @if (@Auth::user()->cuti->status_approval !== 'Proses')
+                    <a href="{{route('cuti-pegawai.create')}}" class="btn btn-info btn-sm">Ajukan Cuti</a>
+                @endif
             </h4>
             <h6 class="card-subtitle">Data table example</h6>
             <div class="table-responsive m-t-40">
@@ -18,7 +20,6 @@
                             <th>Jumlah</th>
                             <th>Tgl Pengajuan</th>
                             <th>Status</th>
-                            <th>Alasan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,9 +39,6 @@
                                 </td>
                                 <td>{{$item->date}}</td>
                                 <td>{{$item->status_approval}}</td>
-                                <td>
-                                    {{$item->reason_approval}}
-                                </td>
                             </tr>
                         <?php
                             $no++

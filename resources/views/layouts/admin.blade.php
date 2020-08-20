@@ -19,6 +19,7 @@
     <!-- You can change the theme colors from here -->
     <link href="{{asset('assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">
     <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -276,38 +277,31 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
                         <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        {{-- <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
-                        </li> --}}
-                        
-                        <!-- ============================================================== -->
                         <!-- Language -->
                         <!-- ============================================================== -->
-                        {{-- <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right scale-up"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
-                        </li> --}}
+                        
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="/foto_pegawai/{{Auth::user()->pegawai->foto ?? '../assets/images/users/5.jpg'}}" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
                                 <ul class="dropdown-user">
                                     <li>
                                         <div class="dw-user-box">
-                                            <div class="u-img"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user"></div>
+                                            <div class="u-img"><img src="/foto_pegawai/{{Auth::user()->pegawai->foto ?? '../assets/images/users/5.jpg'}}" alt="user"></div>
                                             <div class="u-text">
                                                 <h4>{{Auth::user()->name}}</h4>
-                                                <p class="text-muted">{{Auth::user()->email}}</p><a href="" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <p class="text-muted">{{Auth::user()->email}}</p>
                                         </div>
                                     </li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                                    {{-- <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li> --}}
+                                    <li>
+                                        @if (Auth::user()->role == 'Admin')
+                                            <a href="{{url('akun', Auth::user()->id)}}"><i class="ti-user"></i> My Profile</a>
+                                        @else
+                                            <a href="{{url('akun', Auth::user()->pegawai->id)}}"><i class="ti-user"></i> My Profile</a>
+                                        @endif
+                                    </li>
                                     <li>
                                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST">@csrf
@@ -334,19 +328,11 @@
                 <!-- User profile -->
                 <div class="user-profile" style="background: url({{asset('assets/images/background/user-info.jpg')}}) no-repeat;">
                     <!-- User profile image -->
-                    <div class="profile-img"> <img src="{{asset('assets/images/users/1.jpg')}}" alt="user" /> </div>
+                    <div class="profile-img"> <img src="/foto_pegawai/{{Auth::user()->pegawai->foto ?? '../assets/images/users/5.jpg'}}" alt="user" /> </div>
                     <!-- User profile text-->
-                    <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{Auth::user()->name}} <span class="caret"></span></a>
-                        <div class="dropdown-menu animated flipInY">
-                            <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                            <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                            <div class="dropdown-divider"></div>
-                             <a class="dropdown-item" data-toggle="tooltip" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST">@csrf
-                                </form>
-                                <i class="fa fa-power-off"></i>
-                            </a>
-                        </div>
+                    <div class="profile-text"> 
+                        <a href="#" class="dropdown-toggle link u-dropdown text-white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{Auth::user()->name}} <span class="caret"></span>
+                        </a>
                     </div>
                 </div>
                 <!-- End User profile text-->
@@ -357,89 +343,65 @@
                         <li>
                             <a href="{{url('/home')}}" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Dashboard</span></a>
                         </li>    
+                        @php
+                            $null = Auth::user()->pegawai->ttl == null || Auth::user()->pegawai->tempatlahir == null || Auth::user()->pegawai->kelamin == null || Auth::user()->pegawai->agama == null || Auth::user()->pegawai->nonpwp == null || Auth::user()->pegawai->nik == null || Auth::user()->pegawai->alamat == null || Auth::user()->pegawai->foto == null || Auth::user()->status == 'Pensiun'
+                        @endphp
                         @if (Auth::user()->role == 'Admin')
-                            <li>
-                                <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Master Data</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{route('pegawai.index')}}">Pegawai</a></li>
-                                    <li><a href="{{route('cuti.index')}}">Cuti</a></li>
-                                    <li><a href="{{route('absen.index')}}">Absen</a></li>
-                                    <li><a href="{{route('pangkat.index')}}">Pangkat</a></li>
-                                    {{-- <li><a href="{{route('gaji.index')}}">Gaji</a></li> --}}
-                                    <li><a href="{{route('mutasi.index')}}">Mutasi</a></li>
-                                    <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
-                                </ul>
-                            </li>
+                            @if ($null)
+                            @else
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Data Users</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{route('pegawai.index')}}">Pegawai</a></li>
+                                        <li><a href="{{url('index-kadis')}}">Kadis</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Data Master</span></a>
+                                    <ul>
+                                        <li><a href="{{route('pangkat.index')}}">Pangkat</a></li>
+                                        <li><a href="{{route('cuti.index')}}">Cuti</a></li>
+                                        <li><a href="{{route('absen.index')}}">Absen</a></li>
+                                        <li><a href="{{route('mutasi.index')}}">Mutasi</a></li>
+                                        <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                         @elseif(Auth::user()->role == 'Kadis')
-                            <li>
-                                <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Verifikasi</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{route('verifikasi-cuti.index')}}">Cuti</a></li>
-                                    <li><a href="{{url('verifikasi-mutasi')}}">Mutasi</a></li>
-                                </ul>
-                            </li>
+                            @if ($null)
+                                
+                            @else
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Verifikasi</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{route('verifikasi-cuti.index')}}">Cuti</a></li>
+                                        <li><a href="{{url('verifikasi-mutasi')}}">Mutasi</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                         @elseif(Auth::user()->role == 'Pegawai')
-                            <li>
-                                <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Master Data</span></a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="{{route('cuti-pegawai.index')}}">Cuti</a></li>
-                                    <li><a href="{{route('absensi.index')}}">Absen</a></li>
-                                    <li><a href="{{route('mutasi-pegawai.index')}}">Mutasi</a></li>
-                                    <li><a href="{{route('pensiun-pegawai.index')}}">Pensiun</a></li>
-                                </ul>
-                            </li>
+                            @if ($null)
+                            @else
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-bookmark"></i><span class="hide-menu">Master Data</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="{{route('cuti-pegawai.index')}}">Cuti</a></li>
+                                        <li><a href="{{route('absensi.index')}}">Absen</a></li>
+                                        <li><a href="{{route('mutasi-pegawai.index')}}">Mutasi</a></li>
+                                        <li><a href="{{route('pensiun-pegawai.index')}}">Pensiun</a></li>
+                                    </ul>
+                                </li>
+                            @endif
                         @endif
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
-            <!-- End Sidebar scroll-->
-            <!-- Bottom points-->
-            {{-- <div class="sidebar-footer">
-                <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
-                <!-- item-->
-                <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-                <!-- item-->
-                <a class="nav-link" data-toggle="tooltip" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
-                    </form>
-                    <i class="mdi mdi-power"></i>
-                </a>
-            </div> --}}
-            <!-- End Bottom points-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            {{-- <div class="row page-titles">
-                <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Starter kit</h3>
-                </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item">pages</li>
-                        <li class="breadcrumb-item active">Starter kit</li>
-                    </ol>
-                </div>
-                <div>
-                    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-                </div>
-            </div> --}} <br>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+             <br>
+
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -447,73 +409,9 @@
                 <div class="row">
                     @yield('content')
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                {{-- <div class="right-sidebar">
-                    <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
-                        <div class="r-panel-body">
-                            <ul id="themecolors" class="m-t-20">
-                                <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
-                            </ul>
-                            <ul class="m-t-20 chatonline">
-                                <li><b>Chat option</b></li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/1.jpg')}}" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/2.jpg')}}" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/3.jpg')}}" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/4.jpg')}}" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/5.jpg')}}" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/6.jpg')}}" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/7.jpg')}}" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="{{asset('assets/images/users/8.jpg')}}" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> --}}
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
+
             <footer class="footer">
                 {{-- © 2017 Admin Press Admin by themedesigner.in --}}
             </footer>
@@ -525,12 +423,7 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+
     <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('assets/plugins/bootstrap/js/popper.min.js')}}"></script>
@@ -552,8 +445,11 @@
     <!-- ============================================================== -->
     <script src="{{asset('assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
     <!-- This is data table -->
+    <script src="{{asset('assets/plugins/moment/moment.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script>
+    <script src="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('assets/plugins/morrisjs/morris.min.js')}}"></script>
     <script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
     <script type="text/javascript">

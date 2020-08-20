@@ -39,16 +39,16 @@ class User extends Authenticatable
 
     public function pangkat()
     {
-        return $this->hasOne('App\pangkat', 'id_user');
-    }
-
-    public function gaji()
-    {
-        return $this->hasOne('App\gaji','id_user');
+        return $this->hasOne('App\pangkat', 'user_id');
     }
 
     public function pegawai()
     {
-        return $this->hasOne('App\Pegawai','id_user');
+        return $this->hasOne('App\Pegawai','user_id');
+    }
+
+    public function cuti()
+    {
+        return $this->hasOne('App\cuti','user_id');
     }
 }

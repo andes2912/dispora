@@ -15,7 +15,7 @@ class CreatePangkatsTable extends Migration
     {
         Schema::create('pangkats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_user');
+            $table->unsignedBigInteger('user_id');
             $table->string('nip');
             $table->string('nama');
             $table->string('jabatan');
@@ -24,7 +24,7 @@ class CreatePangkatsTable extends Migration
             $table->string('kedudukan');
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }
