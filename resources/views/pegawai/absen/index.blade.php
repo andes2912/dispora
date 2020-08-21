@@ -67,6 +67,10 @@
                                 <option value="Sakit">Sakit</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label">Keterangan</label>
+                            <textarea name="keterangan" class="form-control" rows="3" placeholder="Optional"></textarea>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">

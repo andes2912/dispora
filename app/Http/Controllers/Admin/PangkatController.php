@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Pegawai;
-use App\pangkat;
+use App\{Pegawai,pangkat};
 use Auth;
 
 class PangkatController extends Controller
@@ -13,37 +12,58 @@ class PangkatController extends Controller
 
     public function index()
     {
-        $pangkat = pangkat::all();
-        return view('admin.pangkat.index', compact('pangkat'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $pangkat = pangkat::all();
+                return view('admin.pangkat.index', compact('pangkat'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
 
     public function create()
     {
-        $pegawai = Pegawai::where('pangkat_id', null)->get();
-        return view('admin.pangkat.create', compact('pegawai'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $pegawai = Pegawai::where('pangkat_id', null)->get();
+                return view('admin.pangkat.create', compact('pegawai'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
 
     public function store(Request $request)
     {
-        $pangkat = new pangkat;
-        $pangkat->id = $request->id;
-        $pangkat->user_id = $request->user_id;
-        $pangkat->nip = $request->nip;
-        $pangkat->nama = $request->nama;
-        $pangkat->jabatan = $request->jabatan;
-        $pangkat->kelas = $request->kelas;
-        $pangkat->golongan = $request->golongan;
-        $pangkat->kedudukan = $request->kedudukan;
-        
-        if ($pangkat->save()) {
-            $pegawai = pegawai::where('nip', $pangkat->nip)->first();
-            $pegawai->pangkat_id = $pangkat->id;
-            $pegawai->save();
-        }
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $pangkat = new pangkat;
+                $pangkat->id = $request->id;
+                $pangkat->user_id = $request->user_id;
+                $pangkat->nip = $request->nip;
+                $pangkat->nama = $request->nama;
+                $pangkat->jabatan = $request->jabatan;
+                $pangkat->kelas = $request->kelas;
+                $pangkat->golongan = $request->golongan;
+                $pangkat->kedudukan = $request->kedudukan;
+                
+                if ($pangkat->save()) {
+                    $pegawai = pegawai::where('nip', $pangkat->nip)->first();
+                    $pegawai->pangkat_id = $pangkat->id;
+                    $pegawai->save();
+                }
 
-        return redirect()->route('pangkat.index');
+                return redirect()->route('pangkat.index');
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }   
 
 
@@ -55,20 +75,34 @@ class PangkatController extends Controller
 
     public function edit($id)
     {
-        $edit = pangkat::findOrFail($id);
-        return view('admin.pangkat.edit', compact('edit'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $edit = pangkat::findOrFail($id);
+                return view('admin.pangkat.edit', compact('edit'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
 
     public function update(Request $request, $id)
     {
-        $pangkat = pangkat::findOrFail($id);
-        $pangkat->kelas = $request->kelas;
-        $pangkat->golongan = $request->golongan;
-        $pangkat->kedudukan = $request->kedudukan;
-        $pangkat->Save();
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $pangkat = pangkat::findOrFail($id);
+                $pangkat->kelas = $request->kelas;
+                $pangkat->golongan = $request->golongan;
+                $pangkat->kedudukan = $request->kedudukan;
+                $pangkat->Save();
 
-        return redirect('pangkat');
+                return redirect('pangkat');
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
 

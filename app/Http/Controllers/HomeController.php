@@ -26,9 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Admin") {
+            if (auth::user()->role == "Admin" && Auth::user()->status == 'Aktif') {
                 // Total Pegawai
-                $total = User::whereIn('role',['Pegawai','Kadis'])->count();
+                $total = User::whereIn('role',['Pegawai','Kadis','Admin'])->count();
 
                 // Pegawai Laki
                 $laki = Pegawai::where('kelamin','Laki-laki')->count();
@@ -37,7 +37,7 @@ class HomeController extends Controller
                 $ladies = Pegawai::where('kelamin','Perempuan')->count();
 
                 // Pegawai Aktif
-                $aktif = User::where('status','Aktif')->whereIn('role',['Kadis','Pegawai'])->count();
+                $aktif = User::where('status','Aktif')->whereIn('role',['Kadis','Pegawai','Admin'])->count();
 
                 return view('admin.home', compact('total','laki','ladies','aktif'));
             } elseif(auth::user()->role == "Pegawai") {

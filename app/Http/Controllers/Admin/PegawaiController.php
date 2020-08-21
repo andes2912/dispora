@@ -221,7 +221,13 @@ class PegawaiController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Pegawai::findOrFail($id);
-        return back();
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $delete = Pegawai::findOrFail($id);
+                return back();
+            }
+        } else {
+            return redirect('home');
+        }
     }
 }

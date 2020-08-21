@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Pegawai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
-use App\Pegawai;
+use App\{User,Pegawai};
 use Auth;
 
 class UserController extends Controller

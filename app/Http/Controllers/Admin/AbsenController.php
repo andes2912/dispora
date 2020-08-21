@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Pegawai;
-use App\Absen;
+use App\{Pegawai,Absen};
 use Auth;
 
 class AbsenController extends Controller
@@ -18,7 +17,7 @@ class AbsenController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Admin") {
+            if (auth::user()->role == "Admin" && Auth::user()->status == 'Aktif') {
                 $absen = Absen::all();
                 return view('admin.absen.index',compact('absen'));
             } else {

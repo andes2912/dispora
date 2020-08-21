@@ -96,7 +96,7 @@
                                 <p class="text-muted">{{$show->alamat ?: 'Belum Diisi'}}</p>
                             </div>
                             <hr>
-                        </div>
+                        </div> <hr>
                         <div class="row">
                             <div class="col-md-3 col-xs-6 b-r"> <strong>Gol Darah</strong>
                                 <br>

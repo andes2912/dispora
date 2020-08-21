@@ -4,11 +4,7 @@ namespace App\Http\Controllers\Pegawai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\cuti;
-use App\cuti_taken;
-use App\cuti_count;
-use App\User;
-use App\pegawai;
+use App\{cuti,cuti_taken,cuti_count,User,pegawai};
 use Carbon\carbon;
 use Auth;
 
@@ -18,7 +14,7 @@ class CutiPegawaiController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            if (Auth::user()->auth::user()->role == 'Pegawai') {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
                 $cuti = cuti::where('user_id',auth::user()->id)
                 ->get();
                 return view('pegawai.cuti.index', compact('cuti'));
@@ -32,7 +28,7 @@ class CutiPegawaiController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            if (Auth::user()->auth::user()->role == 'Pegawai') {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
                 $pegawai = pegawai::where('user_id',auth::user()->id)->first();
                 $approval = User::where('role','Kadis')->get();
                 $cek_kadis = User::where('role','Kadis')->first();
@@ -46,15 +42,13 @@ class CutiPegawaiController extends Controller
         } else {
             return redirect('home');
         }
-        
-        
     }
 
 
     public function store(Request $request)
     {
         if (Auth::check()) {
-            if (Auth::user()->auth::user()->role == 'Pegawai') {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
                 $cuti = new cuti;
                 $cuti->id = $request->id;
                 $cuti->user_id = auth::user()->id;

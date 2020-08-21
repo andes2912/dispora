@@ -16,9 +16,15 @@ class MutasiPegawaiController extends Controller
      */
     public function index()
     {
-        $mutasi = mutasi::where('nip',Auth::user()->nip)->orderBy('id','DESC')->get();
-        $cek_mutasi = mutasi::where('nip',Auth::user()->nip)->orderBy('id','DESC')->first();
-        return view('pegawai.mutasi.index', compact('mutasi','cek_mutasi'));
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                $mutasi = mutasi::where('nip',Auth::user()->nip)->orderBy('id','DESC')->get();
+                $cek_mutasi = mutasi::where('nip',Auth::user()->nip)->orderBy('id','DESC')->first();
+                return view('pegawai.mutasi.index', compact('mutasi','cek_mutasi'));
+            }
+        } else {
+            return redirect('home');
+        }
     }
 
     /**
@@ -28,9 +34,14 @@ class MutasiPegawaiController extends Controller
      */
     public function create()
     {
-        $cek_kadis = User::where('role','Kadis')->first();
-        return view('pegawai.mutasi.create', compact('cek_kadis'));
-        
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                $cek_kadis = User::where('role','Kadis')->first();
+                return view('pegawai.mutasi.create', compact('cek_kadis'));
+            }
+        } else {
+            return redirect('home');
+        }        
     }
 
     /**
@@ -41,20 +52,27 @@ class MutasiPegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $mutasi = new mutasi;
-        $mutasi->pangkat_id = $request->pangkat_id;
-        $mutasi->nip = Auth::user()->nip;
-        $mutasi->nama = Auth::user()->name;
-        $mutasi->no_surat = $request->no_surat;
-        $mutasi->perihal = $request->perihal;
-        $mutasi->tgl_mutasi = $request->tgl_mutasi;
-        $mutasi->tgl_masuk = $request->tgl_masuk;
-        $mutasi->jabatan_lama = $request->jabatan_lama;
-        $mutasi->jabatan_baru = $request->jabatan_baru;
-        $mutasi->status = '0';
-        $mutasi->save();
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                $mutasi = new mutasi;
+                $mutasi->pangkat_id = $request->pangkat_id;
+                $mutasi->nip = Auth::user()->nip;
+                $mutasi->nama = Auth::user()->name;
+                $mutasi->no_surat = $request->no_surat;
+                $mutasi->perihal = $request->perihal;
+                $mutasi->tgl_mutasi = $request->tgl_mutasi;
+                $mutasi->tgl_masuk = $request->tgl_masuk;
+                $mutasi->jabatan_lama = $request->jabatan_lama;
+                $mutasi->jabatan_baru = $request->jabatan_baru;
+                $mutasi->status = '0';
+                $mutasi->save();
 
-        return redirect('mutasi-pegawai');
+                return redirect('mutasi-pegawai');
+            }
+        } else {
+            return redirect('home');
+        } 
+        
     }
 
     /**

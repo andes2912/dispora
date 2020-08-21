@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Data Mutasi 
-                @if ($cek_mutasi->status !== 0)
+                @if (@$cek_mutasi->status !== 0)
                     <a href="{{route('mutasi-pegawai.create')}}" class="btn btn-info btn-sm">Ajukan Mutasi</a>  
                 @endif
             </h4>

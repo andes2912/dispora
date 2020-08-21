@@ -16,8 +16,15 @@ class PensiunPegawaiController extends Controller
      */
     public function index()
     {
-        $pensiun = pensiun::where('nip', Auth::user()->nip)->get();
-        return view('pegawai.pensiun.index', compact('pensiun'));
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                $pensiun = pensiun::where('nip', Auth::user()->nip)->get();
+                return view('pegawai.pensiun.index', compact('pensiun'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
     /**
@@ -27,7 +34,14 @@ class PensiunPegawaiController extends Controller
      */
     public function create()
     {
-        return view('pegawai.pensiun.create');
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                return view('pegawai.pensiun.create');
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
     /**
@@ -38,23 +52,30 @@ class PensiunPegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $pensiun = new pensiun;
-        $pensiun->pangkat_id = $request->pangkat_id;
-        $pensiun->nip = $request->nip;
-        $pensiun->nama = $request->nama;
-        $pensiun->date_pensiun = $request->date_pensiun;
-        $pensiun->golongan = $request->golongan;
-        $pensiun->kelas = $request->kelas;
-        $pensiun->kedudukan = $request->kedudukan;
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                $pensiun = new pensiun;
+                $pensiun->pangkat_id = $request->pangkat_id;
+                $pensiun->nip = $request->nip;
+                $pensiun->nama = $request->nama;
+                $pensiun->date_pensiun = $request->date_pensiun;
+                $pensiun->golongan = $request->golongan;
+                $pensiun->kelas = $request->kelas;
+                $pensiun->kedudukan = $request->kedudukan;
 
-        if ($pensiun->save()) {
-            $user = User::where('nip', $pensiun->nip)->first();
-            $user->status = 'Pensiun';
-            $user->save();
-            // dd($pensiun, $user);
+                if ($pensiun->save()) {
+                    $user = User::where('nip', $pensiun->nip)->first();
+                    $user->status = 'Pensiun';
+                    $user->save();
+                    // dd($pensiun, $user);
+                }
+
+                return redirect('pensiun-pegawai');
+            }
+        } else {
+            return redirect('home');
         }
-
-        return redirect('pensiun-pegawai');
+        
     }
 
     /**

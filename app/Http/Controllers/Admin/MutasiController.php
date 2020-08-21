@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\pangkat;
-use App\mutasi;
+use App\{pangkat,mutasi};
 use Carbon\carbon;
 use Auth;
 
@@ -18,8 +17,15 @@ class MutasiController extends Controller
      */
     public function index()
     {
-        $mutasi = mutasi::all();
-        return view('admin.mutasi.index', compact('mutasi'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $mutasi = mutasi::all();
+                return view('admin.mutasi.index', compact('mutasi'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
     /**
@@ -29,8 +35,14 @@ class MutasiController extends Controller
      */
     public function create()
     {
-        $pegawai = pangkat::all();
-        return view('admin.mutasi.create', compact('pegawai'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $pegawai = pangkat::all();
+                return view('admin.mutasi.create', compact('pegawai'));
+            }
+        } else {
+            return redirect('home');
+        }
     }
 
     /**
@@ -41,23 +53,30 @@ class MutasiController extends Controller
      */
     public function store(Request $request)
     {
-        $mutasi = new mutasi;
-        $mutasi->pangkat_id = $request->pangkat_id;
-        $mutasi->nip = $request->nip;
-        $mutasi->nama = $request->nama;
-        $mutasi->no_surat = $request->no_surat;
-        $mutasi->perihal = $request->perihal;
-        $mutasi->tgl_mutasi = Carbon::parse($request->tgl_mutasi)->format('d-m-Y');
-        $mutasi->tgl_masuk = Carbon::parse($request->tgl_masuk)->format('d-m-Y');
-        $mutasi->jabatan_lama = $request->jabatan_lama;
-        $mutasi->jabatan_baru = $request->jabatan_baru;
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $mutasi = new mutasi;
+                $mutasi->pangkat_id = $request->pangkat_id;
+                $mutasi->nip = $request->nip;
+                $mutasi->nama = $request->nama;
+                $mutasi->no_surat = $request->no_surat;
+                $mutasi->perihal = $request->perihal;
+                $mutasi->tgl_mutasi = Carbon::parse($request->tgl_mutasi)->format('d-m-Y');
+                $mutasi->tgl_masuk = Carbon::parse($request->tgl_masuk)->format('d-m-Y');
+                $mutasi->jabatan_lama = $request->jabatan_lama;
+                $mutasi->jabatan_baru = $request->jabatan_baru;
 
-        if ($mutasi->save()) {
-            $pangkat = pangkat::where('id', $mutasi->pangkat_id)->first();
-            $pangkat->jabatan = $mutasi->jabatan_baru;
-            $pangkat->Save();
+                if ($mutasi->save()) {
+                    $pangkat = pangkat::where('id', $mutasi->pangkat_id)->first();
+                    $pangkat->jabatan = $mutasi->jabatan_baru;
+                    $pangkat->Save();
+                }
+                return redirect('mutasi');
+            }
+        } else {
+            return redirect('home');
         }
-        return redirect('mutasi');
+        
     }
 
     /**

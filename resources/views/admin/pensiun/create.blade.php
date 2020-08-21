@@ -59,25 +59,12 @@
                                     <span id="select-kedudukan-pensiun"></span>
                                 </div>
                             </div>
-
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="control-label">Gaji</label>
-                                    <span id="select-gaji-pensiun"></span>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="control-label">Tunjangan</label>
-                                    <span id="select-tunjangan-pensiun"></span>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <a href="{{url('pensiun')}}" class="btn btn-inverse">Cancel</a>
                     </div>
                 </form>
            </div>
@@ -109,16 +96,6 @@
                  $.get('{{ Url("select-kedudukan-pensiun") }}',{'_token': $('meta[name=csrf-token]').attr('content'),nip:nip}, function(resp){  
                     $("#select-kedudukan-pensiun").html(resp);
 
-                 // Gaji
-                 $.get('{{ Url("select-gaji-pensiun") }}',{'_token': $('meta[name=csrf-token]').attr('content'),nip:nip}, function(resp){  
-                    $("#select-gaji-pensiun").html(resp);
-                
-                 // Tunjangan
-                 $.get('{{ Url("select-tunjangan-pensiun") }}',{'_token': $('meta[name=csrf-token]').attr('content'),nip:nip}, function(resp){  
-                    $("#select-tunjangan-pensiun").html(resp);
-                
-                });
-                });
                 });
                 });
                 });

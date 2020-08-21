@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Pegawai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Pegawai;
-use App\Absen;
+use App\{Pegawai,Absen};
 use Carbon\carbon;
 use Auth;
 
@@ -83,12 +82,21 @@ class AbsenPegawaiController extends Controller
 
     public function keluar(Request $request)
     {
-        $keluar = Absen::find($request->id);
-        $keluar->update([
-            'jam_keluar' => Carbon::now()->format('h:i:s'),
-        ]);
+        if (auth()->check()) {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+                $keluar = Absen::find($request->id);
+                $keluar->update([
+                    'jam_keluar' => Carbon::now()->format('h:i:s'),
+                ]);
 
-        return $keluar;
+                return $keluar;
+            } else {
+                return redirect('home');
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
     /**

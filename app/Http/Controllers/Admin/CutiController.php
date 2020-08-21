@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\cuti;
-use App\cuti_taken;
-use App\User;
+use App\{cuti,User,cuti_taken};
 use Carbon\carbon;
 use Auth;
 
@@ -19,8 +17,14 @@ class CutiController extends Controller
      */
     public function index()
     {
-        $cuti = cuti::all();
-        return view('admin.cuti.index', compact('cuti'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $cuti = cuti::all();
+                return view('admin.cuti.index', compact('cuti'));
+            }
+        } else {
+            return redirect('home');
+        }
     }
 
     /**
@@ -52,11 +56,18 @@ class CutiController extends Controller
      */
     public function show($id)
     {
-        $cuti = cuti::selectRaw('cutis.id,cutis.nip,cutis.status_approval,cutis.reason,cutis.status_approval,cutis.reason_approval,a.nama')
-        ->leftJoin('Pegawais as a','a.nip','=','cutis.nip')
-        ->findOrFail($id);
-        $date_cuti = cuti_taken::where('id_cuti', $id)->get();
-        return view('admin.cuti.view', compact('cuti','date_cuti'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $cuti = cuti::selectRaw('cutis.id,cutis.nip,cutis.status_approval,cutis.reason,cutis.status_approval,cutis.reason_approval,a.nama')
+                ->leftJoin('Pegawais as a','a.nip','=','cutis.nip')
+                ->findOrFail($id);
+                $date_cuti = cuti_taken::where('id_cuti', $id)->get();
+                return view('admin.cuti.view', compact('cuti','date_cuti'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
     /**
@@ -79,13 +90,20 @@ class CutiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cuti = cuti::findOrFail($id);
-        $cuti->status_approval  = $request->status_approval;
-        $cuti->date_approval    = Carbon::parse($request->date_approval)->format('d-m-Y');
-        $cuti->reason_approval  = $request->reason_approval;
-        $cuti->save();
-
-        return redirect('cuti');
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $cuti = cuti::findOrFail($id);
+                $cuti->status_approval  = $request->status_approval;
+                $cuti->date_approval    = Carbon::parse($request->date_approval)->format('d-m-Y');
+                $cuti->reason_approval  = $request->reason_approval;
+                $cuti->save();
+        
+                return redirect('cuti');
+            }
+        } else {
+            return redirect('home');
+        }
+       
     }
 
     /**

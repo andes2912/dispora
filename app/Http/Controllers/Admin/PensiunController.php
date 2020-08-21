@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\pensiun;
-use App\pangkat;
-use App\gaji;
-use App\User;
+use App\{pensiun,pangkat,gaji,User};
+use Auth;
 
 class PensiunController extends Controller
 {
@@ -18,8 +16,15 @@ class PensiunController extends Controller
      */
     public function index()
     {
-        $pensiun = pensiun::all();
-        return view('admin.pensiun.index', compact('pensiun'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+               $pensiun = pensiun::all();
+                return view('admin.pensiun.index', compact('pensiun'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
     /**
@@ -29,8 +34,15 @@ class PensiunController extends Controller
      */
     public function create()
     {
-        $pegawai = pangkat::all();
-        return view('admin.pensiun.create', compact('pegawai'));
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $pegawai = pangkat::all();
+                return view('admin.pensiun.create', compact('pegawai'));
+            }
+        } else {
+            return redirect('home');
+        }
+        
     }
 
     /**
@@ -41,22 +53,29 @@ class PensiunController extends Controller
      */
     public function store(Request $request)
     {
-        $pensiun = new pensiun;
-        $pensiun->pangkat_id = $request->pangkat_id;
-        $pensiun->nip = $request->nip;
-        $pensiun->nama = $request->nama;
-        $pensiun->date_pensiun = $request->date_pensiun;
-        $pensiun->golongan = $request->golongan;
-        $pensiun->kelas = $request->kelas;
-        $pensiun->kedudukan = $request->kedudukan;
-        $pensiun->gaji = $request->gaji;
-        $pensiun->tunjangan = $request->tunjangan;
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $pensiun = new pensiun;
+                $pensiun->pangkat_id = $request->pangkat_id;
+                $pensiun->nip = $request->nip;
+                $pensiun->nama = $request->nama;
+                $pensiun->date_pensiun = $request->date_pensiun;
+                $pensiun->golongan = $request->golongan;
+                $pensiun->kelas = $request->kelas;
+                $pensiun->kedudukan = $request->kedudukan;
+                $pensiun->gaji = $request->gaji;
+                $pensiun->tunjangan = $request->tunjangan;
 
-        if ($pensiun->save()) {
-            $user = User::where('nip', $pensiun->nip)->first();
-            $user->status = 'Pensiun';
-            $user->save();
+                if ($pensiun->save()) {
+                    $user = User::where('nip', $pensiun->nip)->first();
+                    $user->status = 'Pensiun';
+                    $user->save();
+                }
+            }
+        } else {
+            return redirect('home');
         }
+        
     }
 
     /**

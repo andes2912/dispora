@@ -18,7 +18,7 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{asset('assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">
-    <link href="../assets/plugins/morrisjs/morris.css" rel="stylesheet">
+    <link href="{{asset('assets/plugins/morrisjs/morris.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -449,9 +449,13 @@
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/select2/dist/js/select2.full.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script>
-    <script src="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/raphael/raphael-min.js')}}"></script>
     <script src="{{asset('assets/plugins/morrisjs/morris.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
+    <!-- sparkline chart -->
+    <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
+    <script src="{{asset('assets/js/dashboard4.js')}}"></script>    
     <script type="text/javascript">
         $('#myTable').DataTable();
         $(".select2").select2();

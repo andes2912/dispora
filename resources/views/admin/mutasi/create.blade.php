@@ -75,7 +75,8 @@
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="submit" class="btn btn-info">Submit</button>
+                        <a href="{{url('mutasi')}}" class="btn btn-inverse">Cancel</a>
                     </div>
                 </form>
            </div>
