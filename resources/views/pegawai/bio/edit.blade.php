@@ -96,6 +96,24 @@
                         <!--/span-->
                     </div>
 
+                     <!--/row-->
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nomor Askes</label>
+                                <input type="number" name="noaskes" class="form-control" value="{{Auth::user()->pegawai->noaskes}}" autocomplete="off">
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nomor Taspen</label>
+                                <input type="number" name="notaspen" class="form-control" value="{{Auth::user()->pegawai->notaspen}}" autocomplete="off">
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+
                     <!--/row-->
                     <div class="row">
                         <div class="col-md-6">

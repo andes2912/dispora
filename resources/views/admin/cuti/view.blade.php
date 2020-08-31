@@ -7,7 +7,7 @@
             <h4 class="card-title">Data Cuti Pegawai</h4>
             <h6 class="card-subtitle">Data table example</h6>
             <div class="form-body">
-                <form action="{{route('cuti.update', $cuti->id)}}" method="post">
+                {{-- <form action="{{route('cuti.update', $cuti->id)}}" method="post"> --}}
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="control-label">Status</label>
@@ -67,8 +67,8 @@
                                 <input type="text" value="{{auth::user()->name}}" class="form-control" readonly>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div> --}}
+                    {{-- <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="control-label">Alasan Pegawai</label>
@@ -85,8 +85,8 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div> --}}
+                    {{-- <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 @if ($cuti->status_approval == 'Proses')
@@ -97,8 +97,15 @@
                                 @endif
                             </div>
                         </div>
+                    </div> --}}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <a href="{{route('cuti.index')}}" class="btn btn-warning btn-sm">Back</a>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                {{-- </form> --}}
             </div>
         </div>
     </div>

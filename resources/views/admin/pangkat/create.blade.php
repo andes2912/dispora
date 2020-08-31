@@ -44,6 +44,7 @@
                                         <option value="B">Golongan B</option>
                                         <option value="C">Golongan C</option>
                                         <option value="D">Golongan D</option>
+                                        <option value="E">Golongan E</option>
                                     </select>
                                 </div>
                             </div>
@@ -52,10 +53,10 @@
                                     <label class="control-label">Kelas</label>
                                     <select name="kelas" id="" class="form-control" required>
                                         <option value="">Select</option>
-                                        <option value="A">Golongan A</option>
-                                        <option value="B">Golongan B</option>
-                                        <option value="C">Golongan C</option>
-                                        <option value="D">Golongan D</option>
+                                        <option value="I">Juru</option>
+                                        <option value="II">Pengatur</option>
+                                        <option value="III">Penata</option>
+                                        <option value="IV">Pembina</option>
                                     </select>
                                 </div>
                             </div>

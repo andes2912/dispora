@@ -26,13 +26,43 @@
             </button>
         </div>
     @endif
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-4 col-md-6">
         <div class="card">
             <div class="card-body">
                 <!-- Row -->
                 <div class="row">
-                    <div class="col-8"><h2>2376 <i class="ti-angle-down font-14 text-danger"></i></h2>
-                        <h6>Order Received</h6></div>
+                    <div class="col-8"><h2> {{@$cuti_taken}} Hari <i class="fa fa-users text-danger"></i></h2>
+                        <h6> Cuti Di Ambil</h6></div>
+                    <div class="col-4 align-self-center text-right  p-l-0">
+                        <div id="sparklinedash3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-8"><h2> {{@$sisa_cuti->sisa ? '' : 0}} Hari <i class="fa fa-users text-danger"></i></h2>
+                        <h6> Sisa Cuti</h6></div>
+                    <div class="col-4 align-self-center text-right  p-l-0">
+                        <div id="sparklinedash3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-8"><h2> {{@$tidak_hadir}} Hari <i class="fa fa-users text-danger"></i></h2>
+                        <h6> Tidak Hadir Dikantor</h6></div>
                     <div class="col-4 align-self-center text-right  p-l-0">
                         <div id="sparklinedash3"></div>
                     </div>

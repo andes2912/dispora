@@ -26,4 +26,64 @@
     </button>
 </div>
 @endif
+<!-- Column -->
+<div class="col-lg-3 col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-8"><h2>{{$total}} <i class="fa fa-users text-danger"></i></h2>
+                    <h6> Total Pegawai</h6></div>
+                <div class="col-4 align-self-center text-right  p-l-0">
+                    <div id="sparklinedash3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Column -->
+<div class="col-lg-3 col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-8"><h2 class="">{{$laki}} <i class="fa fa-user text-success"></i></h2>
+                    <h6>Laki-laki</h6></div>
+                <div class="col-4 align-self-center text-right p-l-0">
+                    <div id="sparklinedash"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Column -->
+<div class="col-lg-3 col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-8"><h2>{{$ladies}} <i class="fa fa-user text-info"></i></h2>
+                    <h6>Perempuan</h6></div>
+                <div class="col-4 align-self-center text-right p-l-0">
+                    <div id="sparklinedash2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Column -->
+<div class="col-lg-3 col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <!-- Row -->
+            <div class="row">
+                <div class="col-8"><h2>{{$aktif}} <i class="fa fa-user-circle text-primary"></i></h2>
+                    <h6>Aktif</h6></div>
+                <div class="col-4 align-self-center text-right p-l-0">
+                    <div id="sparklinedash4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

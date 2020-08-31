@@ -41,6 +41,8 @@
                     <h6 class="card-subtitle">NIK : {{$show->nik ?: 'Belum Diisi'}}</h6>
                     @if ($profileNull)
                         <a href="{{url('akun/'. Auth::user()->pegawai->id.'/'. 'edit')}}" class="btn btn-warning btn-sm">Lengkapi Profile</a>
+                    @else
+                        <a href="{{url('akun/'. Auth::user()->pegawai->id.'/'. 'edit')}}" class="btn btn-warning btn-sm">Edit Profile</a>
                     @endif
                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#changepassword">Change Password</button>
                 </center>

@@ -58,7 +58,7 @@ class CutiController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
-                $cuti = cuti::selectRaw('cutis.id,cutis.nip,cutis.status_approval,cutis.reason,cutis.status_approval,cutis.reason_approval,a.nama')
+                $cuti = cuti::selectRaw('cutis.id,cutis.nip,cutis.status_approval,cutis.reason,cutis.status_approval,a.nama')
                 ->leftJoin('Pegawais as a','a.nip','=','cutis.nip')
                 ->findOrFail($id);
                 $date_cuti = cuti_taken::where('id_cuti', $id)->get();
