@@ -170,6 +170,12 @@
                                         <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-download"></i><span class="hide-menu">Laporan</span></a>
+                                    <ul>
+                                        <li><a href="{{url('laporan-pegawai')}}">Pegawai</a></li>
+                                    </ul>
+                                </li>
                             @endif
                         @elseif(Auth::user()->role == 'Kadis')
                             @if ($null)

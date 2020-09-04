@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\{Pegawai,User,pangkat};
+use PDF;
+use Excel;
+use App\Exports\PegawaiExport;
 use Auth;
 
 class PegawaiController extends Controller
@@ -247,6 +250,40 @@ class PegawaiController extends Controller
             }
         } else {
             return redirect('home');
+        }
+    }
+
+    // Laporan Pegawai
+    public function laporanP()
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Admin') {
+                $pegawai = User::with('pegawai')->get();
+                return view('admin.laporan.pegawai', compact('pegawai'));
+            }
+        }
+    }
+
+    public function getPDF()
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Admin') {
+                $pegawai = User::with('pegawai')->get();
+
+                $pdf = PDF::loadView('admin.laporan.pegawaiPDF',['pegawai' => $pegawai]);
+                $pdf->setPaper('A4', 'landscape');
+                return $pdf->download('pegawaiPDF.pdf');
+            }
+        }
+    }
+
+    public function getEXCEL()
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Admin') {
+                $pegawai = 'pegawai_'.date('Y-m-d_H-i-s').'.xlsx';
+                    return Excel::download(new PegawaiExport, $pegawai);
+            }
         }
     }
 }

@@ -60,6 +60,10 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('select-gaji-pensiun','Admin\PensiunController@select_gaji_pensiun');
     Route::get('select-tunjangan-pensiun','Admin\PensiunController@select_tunjangan_pensiun');
 
+    // Laporan
+    Route::get('laporan-pegawai','Admin\PegawaiController@laporanP');
+    Route::get('get-pdf','Admin\PegawaiController@getPDF');
+    Route::get('get-excel','Admin\PegawaiController@getEXCEL');
 
 // KADIS
     // Verifikasi
