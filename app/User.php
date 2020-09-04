@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\cuti','user_id');
     }
+
+    public function absen()
+    {
+        return $this->hasOne('App\Absen','user_id');
+    }
 }

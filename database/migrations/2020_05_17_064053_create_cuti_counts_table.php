@@ -15,14 +15,14 @@ class CreateCutiCountsTable extends Migration
     {
         Schema::create('cuti_counts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_cuti');
+            $table->unsignedBigInteger('cuti_id');
             $table->string('nip');
             $table->integer('batas');
             $table->integer('sisa');
             $table->integer('taken');
             $table->timestamps();
 
-            $table->foreign('id_cuti')->references('id')->on('cutis')->onDelete('cascade');
+            $table->foreign('cuti_id')->references('id')->on('cutis')->onDelete('cascade');
         });
     }
 

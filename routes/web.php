@@ -22,10 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 // ADMIN
     // Data Pegawai
     Route::resource('pegawai','Admin\PegawaiController');
-
+    Route::delete('delete-pegawai','Admin\PegawaiController@delete');
     // Pegawai
     Route::get('index-kadis','Admin\PegawaiController@index_kadis');
     Route::get('create-kadis','Admin\PegawaiController@create_kadis');
+    Route::get('reset-password-pegawai','Admin\PegawaiController@resetpw');
 
     // Absen Pegawai
     Route::resource('absen','Admin\AbsenController');

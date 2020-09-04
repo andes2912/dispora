@@ -219,12 +219,31 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    public function delete(Request $request)
     {
         if (Auth::check()) {
             if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
-                $delete = Pegawai::findOrFail($id);
+                $user_id = $request->input('user_id');
+                
+                User::destroy($user_id);
                 return back();
+            }
+        } else {
+            return redirect('home');
+        }
+    }
+
+    public function resetpw(Request $request)
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
+                $resetpw = User::find($request->user_id);
+                $resetpw->update([
+                    'password' => bcrypt(1234567),
+                ]);
+
+                return $resetpw;
             }
         } else {
             return redirect('home');

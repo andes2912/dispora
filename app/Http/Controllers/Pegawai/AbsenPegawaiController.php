@@ -20,8 +20,8 @@ class AbsenPegawaiController extends Controller
         if (auth()->check()) {
             if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
                 $cek = Pegawai::where('user_id',auth::user()->id)->first();
-                $cekabsen = Absen::where('id_pegawai',$cek->id)->first();
-                $absen = Absen::where('id_pegawai',$cek->id)->get();
+                $cekabsen = Absen::where('user_id',$cek->id)->first();
+                $absen = Absen::where('user_id',$cek->id)->get();
                 $date = Carbon::now()->format('d-m-Y');
                 $jam = Carbon::now()->format('h:i:s');
                 $dates = '04:30:0';
@@ -62,11 +62,10 @@ class AbsenPegawaiController extends Controller
     {
         if (auth()->check()) {
             if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
-                $cek = Pegawai::where('user_id',auth::user()->id)->first();
                 $absen = New Absen;
-                $absen->id_pegawai = $cek->id;
-                $absen->nip = $cek->nip;
-                $absen->nama = $cek->nama;
+                $absen->user_id = Auth::user()->id;
+                $absen->nip = Auth::user()->nip;
+                $absen->nama = Auth::user()->name;
                 $absen->tgl = carbon::now()->format('d-m-Y');
                 $absen->jam_masuk = carbon::now()->format('h:i:s');
                 $absen->status = $request->status;
