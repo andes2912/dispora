@@ -15,10 +15,14 @@ class AbsenPegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected function rule() {
+        $null = Auth::user()->pegawai->ttl == null || Auth::user()->pegawai->tempatlahir == null || Auth::user()->pegawai->kelamin == null || Auth::user()->pegawai->agama == null || Auth::user()->pegawai->nonpwp == null || Auth::user()->pegawai->nik == null || Auth::user()->pegawai->alamat == null || Auth::user()->pegawai->foto == null || Auth::user()->status == 'Pensiun';
+    }
     public function index()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $cek = Pegawai::where('user_id',auth::user()->id)->first();
                 $cekabsen = Absen::where('user_id',$cek->id)->first();
                 $absen = Absen::where('user_id',$cek->id)->get();
@@ -42,7 +46,7 @@ class AbsenPegawaiController extends Controller
     public function create()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 return view('pegawai.absen.create');
             } else {
                 return redirect('home');
@@ -61,7 +65,7 @@ class AbsenPegawaiController extends Controller
     public function store(Request $request)
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $absen = New Absen;
                 $absen->user_id = Auth::user()->id;
                 $absen->nip = Auth::user()->nip;
@@ -82,7 +86,7 @@ class AbsenPegawaiController extends Controller
     public function keluar(Request $request)
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $keluar = Absen::find($request->id);
                 $keluar->update([
                     'jam_keluar' => Carbon::now()->format('h:i:s'),
