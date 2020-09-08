@@ -40,6 +40,12 @@
                 top: 18px;
             }
 
+            .top-left {
+                position: absolute;
+                left: 10px;
+                top: 18px;
+            }
+
             .content {
                 text-align: center;
             }
@@ -65,6 +71,9 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            <div class="top-left ">
+                <img src="{{{asset('logo/logo.png')}}}" style="height:35px">
+            </div>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
