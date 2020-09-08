@@ -15,12 +15,12 @@ class CreateCutiTakensTable extends Migration
     {
         Schema::create('cuti_takens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_cuti');
+            $table->unsignedBigInteger('cuti_id');
             $table->string('nip');
             $table->string('date_leave');
             $table->timestamps();
 
-            $table->foreign('id_cuti')->references('id')->on('cutis')->onDelete('cascade');
+            $table->foreign('cuti_id')->references('id')->on('cutis')->onDelete('cascade');
         });
     }
 

@@ -47,18 +47,18 @@ class HomeController extends Controller
             } elseif(auth::user()->role == "Pegawai") {
                 // Cuti Diambil
                 $cuti_taken = cuti::selectRaw('cutis.id,cutis.user_id')
-                    ->leftJoin('cuti_takens as a','a.id_cuti','=','cutis.id')
+                    ->leftJoin('cuti_takens as a','a.cuti_id','=','cutis.id')
                     ->where('user_id',auth::user()->id)
                     ->count();
                 // Sisa Cuti
                 $sisa_cuti = cuti::selectRaw('cutis.id,cutis.user_id,a.sisa')
-                    ->leftJoin('cuti_counts as a','a.id_cuti','=','cutis.id')
+                    ->leftJoin('cuti_counts as a','a.cuti_id','=','cutis.id')
                     ->where('user_id',auth::user()->id)
                     ->first();
                 
                 // Abses
-                $tidak_hadir = Absen::selectRaw('absens.id,abses.id_pegawai,a.user_id')
-                    ->leftJoin('pegawais as a','a.id','=','absens.id_pegawai')
+                $tidak_hadir = Absen::selectRaw('absens.id,abses.user_id,a.user_id')
+                    ->leftJoin('pegawais as a','a.id','=','absens.user_id')
                     ->where('a.user_id',auth::user()->id)
                     ->whereIn('status',['Izin','Sakit'])
                     ->count();

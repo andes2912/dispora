@@ -11,10 +11,14 @@ use Auth;
 class CutiPegawaiController extends Controller
 {
 
+    protected function rule() {
+        $null = Auth::user()->pegawai->ttl == null || Auth::user()->pegawai->tempatlahir == null || Auth::user()->pegawai->kelamin == null || Auth::user()->pegawai->agama == null || Auth::user()->pegawai->nonpwp == null || Auth::user()->pegawai->nik == null || Auth::user()->pegawai->alamat == null || Auth::user()->pegawai->foto == null || Auth::user()->status == 'Pensiun';
+    }
+
     public function index()
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif' && $this->rule() ) {
                 $cuti = cuti::where('user_id',auth::user()->id)
                 ->get();
                 return view('pegawai.cuti.index', compact('cuti'));
@@ -28,7 +32,7 @@ class CutiPegawaiController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $pegawai = pegawai::where('user_id',auth::user()->id)->first();
                 $approval = User::where('role','Kadis')->get();
                 $cek_kadis = User::where('role','Kadis')->first();
@@ -48,7 +52,7 @@ class CutiPegawaiController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $cuti = new cuti;
                 $cuti->id = $request->id;
                 $cuti->user_id = auth::user()->id;

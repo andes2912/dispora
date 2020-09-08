@@ -22,10 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 // ADMIN
     // Data Pegawai
     Route::resource('pegawai','Admin\PegawaiController');
-
+    Route::delete('delete-pegawai','Admin\PegawaiController@delete');
     // Pegawai
     Route::get('index-kadis','Admin\PegawaiController@index_kadis');
     Route::get('create-kadis','Admin\PegawaiController@create_kadis');
+    Route::get('reset-password-pegawai','Admin\PegawaiController@resetpw');
 
     // Absen Pegawai
     Route::resource('absen','Admin\AbsenController');
@@ -59,6 +60,10 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('select-gaji-pensiun','Admin\PensiunController@select_gaji_pensiun');
     Route::get('select-tunjangan-pensiun','Admin\PensiunController@select_tunjangan_pensiun');
 
+    // Laporan
+    Route::get('laporan-pegawai','Admin\PegawaiController@laporanP');
+    Route::get('get-pdf','Admin\PegawaiController@getPDF');
+    Route::get('get-excel','Admin\PegawaiController@getEXCEL');
 
 // KADIS
     // Verifikasi

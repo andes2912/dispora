@@ -15,13 +15,17 @@ class AbsenPegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected function rule() {
+        $null = Auth::user()->pegawai->ttl == null || Auth::user()->pegawai->tempatlahir == null || Auth::user()->pegawai->kelamin == null || Auth::user()->pegawai->agama == null || Auth::user()->pegawai->nonpwp == null || Auth::user()->pegawai->nik == null || Auth::user()->pegawai->alamat == null || Auth::user()->pegawai->foto == null || Auth::user()->status == 'Pensiun';
+    }
     public function index()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $cek = Pegawai::where('user_id',auth::user()->id)->first();
-                $cekabsen = Absen::where('id_pegawai',$cek->id)->first();
-                $absen = Absen::where('id_pegawai',$cek->id)->get();
+                $cekabsen = Absen::where('user_id',$cek->id)->first();
+                $absen = Absen::where('user_id',$cek->id)->get();
                 $date = Carbon::now()->format('d-m-Y');
                 $jam = Carbon::now()->format('h:i:s');
                 $dates = '04:30:0';
@@ -42,7 +46,7 @@ class AbsenPegawaiController extends Controller
     public function create()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 return view('pegawai.absen.create');
             } else {
                 return redirect('home');
@@ -61,12 +65,11 @@ class AbsenPegawaiController extends Controller
     public function store(Request $request)
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
-                $cek = Pegawai::where('user_id',auth::user()->id)->first();
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $absen = New Absen;
-                $absen->id_pegawai = $cek->id;
-                $absen->nip = $cek->nip;
-                $absen->nama = $cek->nama;
+                $absen->user_id = Auth::user()->id;
+                $absen->nip = Auth::user()->nip;
+                $absen->nama = Auth::user()->name;
                 $absen->tgl = carbon::now()->format('d-m-Y');
                 $absen->jam_masuk = carbon::now()->format('h:i:s');
                 $absen->status = $request->status;
@@ -83,7 +86,7 @@ class AbsenPegawaiController extends Controller
     public function keluar(Request $request)
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
                 $keluar = Absen::find($request->id);
                 $keluar->update([
                     'jam_keluar' => Carbon::now()->format('h:i:s'),

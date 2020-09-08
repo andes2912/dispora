@@ -77,7 +77,7 @@
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <p class="mt-3 ml-3">Selamat Datang, Di Halaman {{Auth::user()->role}}</p>
+                        <p class="mt-3 ml-3 text-white">Selamat Datang, Di Halaman {{Auth::user()->role}}</p>
                     </ul>
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
@@ -168,6 +168,12 @@
                                         <li><a href="{{route('absen.index')}}">Absen</a></li>
                                         <li><a href="{{route('mutasi.index')}}">Mutasi</a></li>
                                         <li><a href="{{route('pensiun.index')}}">Pensiun</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-download"></i><span class="hide-menu">Laporan</span></a>
+                                    <ul>
+                                        <li><a href="{{url('laporan-pegawai')}}">Pegawai</a></li>
                                     </ul>
                                 </li>
                             @endif
