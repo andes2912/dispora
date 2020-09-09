@@ -22,7 +22,7 @@ class AbsenPegawaiController extends Controller
     public function index()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
                 $cek = Pegawai::where('user_id',auth::user()->id)->first();
                 $cekabsen = Absen::where('user_id',$cek->id)->first();
                 $absen = Absen::where('user_id',$cek->id)->get();
@@ -46,7 +46,7 @@ class AbsenPegawaiController extends Controller
     public function create()
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
                 return view('pegawai.absen.create');
             } else {
                 return redirect('home');
@@ -65,7 +65,7 @@ class AbsenPegawaiController extends Controller
     public function store(Request $request)
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
                 $absen = New Absen;
                 $absen->user_id = Auth::user()->id;
                 $absen->nip = Auth::user()->nip;
@@ -86,7 +86,7 @@ class AbsenPegawaiController extends Controller
     public function keluar(Request $request)
     {
         if (auth()->check()) {
-            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif' && $this->rule()) {
+            if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
                 $keluar = Absen::find($request->id);
                 $keluar->update([
                     'jam_keluar' => Carbon::now()->format('h:i:s'),

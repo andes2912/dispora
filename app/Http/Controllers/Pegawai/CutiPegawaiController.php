@@ -18,7 +18,7 @@ class CutiPegawaiController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif' && $this->rule() ) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif' ) {
                 $cuti = cuti::where('user_id',auth::user()->id)
                 ->get();
                 return view('pegawai.cuti.index', compact('cuti'));
@@ -32,7 +32,7 @@ class CutiPegawaiController extends Controller
     public function create()
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif' && $this->rule()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
                 $pegawai = pegawai::where('user_id',auth::user()->id)->first();
                 $approval = User::where('role','Kadis')->get();
                 $cek_kadis = User::where('role','Kadis')->first();
@@ -52,7 +52,7 @@ class CutiPegawaiController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif' && $this->rule()) {
+            if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
                 $cuti = new cuti;
                 $cuti->id = $request->id;
                 $cuti->user_id = auth::user()->id;

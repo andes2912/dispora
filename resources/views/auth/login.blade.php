@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Halaman Login</title>
+    <title>Halaman Login Dispora</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <form class="form-horizontal form-material" id="loginform" action="{{route('login')}}" method="POST">
                         @csrf
-                        <h3 class="box-title m-b-20">LOGIN </h3>
+                        <h3 class="box-title m-b-20 text-center">LOGIN DISPORA</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 <input class="form-control @error('nip') is-invalid @enderror value="{{ old('nip') ?: old('nip') }} type="text" name="nip" placeholder="NIP or E-mail" required> 

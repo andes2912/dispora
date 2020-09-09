@@ -29,10 +29,11 @@
                                     <label class="control-label">Golongan</label>
                                     <select name="golongan" class="form-control" required>
                                         <option value="">Select</option>
-                                        <option value="A"@if($edit->golongan=='A') selected='selected' @endif >A</option>
-                                        <option value="B"@if($edit->golongan=='B') selected='selected' @endif >B</option>
-                                        <option value="C"@if($edit->golongan=='C') selected='selected' @endif >D</option>
-                                        <option value="D"@if($edit->golongan=='D') selected='selected' @endif >D</option>
+                                        <option value="A"@if($edit->golongan=='A') selected='selected' @endif >Golongan A</option>
+                                        <option value="B"@if($edit->golongan=='B') selected='selected' @endif >Golongan B</option>
+                                        <option value="C"@if($edit->golongan=='C') selected='selected' @endif >Golongan C</option>
+                                        <option value="D"@if($edit->golongan=='D') selected='selected' @endif >Golongan D</option>
+                                        <option value="E"@if($edit->golongan=='E') selected='selected' @endif >Golongan E</option>
                                     </select>
                                 </div>
                             </div>
@@ -41,10 +42,10 @@
                                     <label class="control-label">Kelas</label>
                                     <select name="kelas" class="form-control" required>
                                         <option value="">Select</option>
-                                        <option value="A"@if($edit->kelas=='A') selected='selected' @endif >A</option>
-                                        <option value="B"@if($edit->kelas=='B') selected='selected' @endif >B</option>
-                                        <option value="C"@if($edit->kelas=='C') selected='selected' @endif >C</option>
-                                        <option value="D"@if($edit->kelas=='D') selected='selected' @endif >D</option>
+                                        <option value="I"@if($edit->kelas=='I') selected='selected' @endif >Juru</option>
+                                        <option value="II"@if($edit->kelas=='II') selected='selected' @endif >Pengatur</option>
+                                        <option value="II"@if($edit->kelas=='III') selected='selected' @endif >Penata</option>
+                                        <option value="IV"@if($edit->kelas=='IV') selected='selected' @endif >Pembina</option>
                                     </select>
                                 </div>
                             </div>

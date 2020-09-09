@@ -172,7 +172,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Foto Pegawai</label>
-                                @if (Auth::user()->pegawai->foto == NULL)
+                                @if (Auth::user()->pegawai->foto == NULL )
                                     <input type="file" name="foto" class="form-control">
                                 @endif
                             </div>

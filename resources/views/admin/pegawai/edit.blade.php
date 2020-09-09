@@ -151,14 +151,14 @@
                             </div>
                         </div>
                         <!--/span-->
+                        @if ($edit->foto == NULL && $edit->user_id == Auth::user()->id)
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Foto Pegawai</label>
-                                @if ($edit->foto == NULL)
                                     <input type="file" name="foto" class="form-control">
-                                @endif
+                                </div>
                             </div>
-                        </div>
+                        @endif
                         <!--/span-->
                     </div>
                 </div>
