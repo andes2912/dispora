@@ -40,7 +40,16 @@ class HomeController extends Controller
                 // Pegawai Aktif
                 $aktif = User::where('status','Aktif')->whereIn('role',['Kadis','Pegawai','Admin'])->count();
 
-                return view('admin.home', compact('total','laki','ladies','aktif'));
+                // Masuk
+                $hadir = Absen::where('status','Hadir')->count();
+
+                // Izin
+                $izin = Absen::where('status','Izin')->count();
+
+                 // Sakit
+                 $Sakit = Absen::where('status','Sakit')->count();
+
+                return view('admin.home', compact('total','laki','ladies','aktif','hadir','izin','Sakit'));
             // End Admin
 
             // Pegawai
@@ -56,7 +65,7 @@ class HomeController extends Controller
                     ->where('user_id',auth::user()->id)
                     ->first();
                 
-                // Abses
+                // Absen
                 $tidak_hadir = Absen::selectRaw('absens.id,abses.user_id,a.user_id')
                     ->leftJoin('pegawais as a','a.id','=','absens.user_id')
                     ->where('a.user_id',auth::user()->id)
@@ -79,7 +88,17 @@ class HomeController extends Controller
  
                  // Pegawai Aktif
                  $aktif = User::where('status','Aktif')->whereIn('role',['Kadis','Pegawai','Admin'])->count();
-                return view('kadis.home',compact('total','laki','ladies','aktif'));
+
+                 // Masuk
+                $hadir = Absen::where('status','Hadir')->count();
+
+                // Izin
+                $izin = Absen::where('status','Izin')->count();
+
+                 // Sakit
+                 $Sakit = Absen::where('status','Sakit')->count();
+
+                return view('kadis.home',compact('total','laki','ladies','aktif','hadir','izin','Sakit'));
             }
         }
     }

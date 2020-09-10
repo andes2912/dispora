@@ -188,6 +188,12 @@
                                         <li><a href="{{url('verifikasi-mutasi')}}">Mutasi</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-download"></i><span class="hide-menu">Laporan</span></a>
+                                    <ul>
+                                        <li><a href="{{url('laporan-pegawai-kadis')}}">Pegawai</a></li>
+                                    </ul>
+                                </li>
                             @endif
                         @elseif(Auth::user()->role == 'Pegawai')
                             @if ($null)
@@ -223,7 +229,6 @@
             </div>
 
             <footer class="footer">
-                {{-- © 2017 Admin Press Admin by themedesigner.in --}}
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -266,6 +271,7 @@
     <!-- sparkline chart -->
     <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <script src="{{asset('assets/js/dashboard4.js')}}"></script>    
+    <script src="{{asset('assets/js/Chart.min.js')}}"></script>    
     <script type="text/javascript">
         $('#myTable').DataTable();
         $(".select2").select2();

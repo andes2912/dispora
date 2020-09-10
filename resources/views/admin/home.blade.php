@@ -86,7 +86,94 @@
         </div>
     </div>
 </div>
+
+{{-- Chart Data Pegawai --}}
+<div class="col-lg-6 col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</div>
+
+{{-- Chart Data Absen Pegawai --}}
+<div class="col-lg-6 col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <canvas id="absen"></canvas>
+        </div>
+    </div>
+</div>
 @endsection
 @section('scripts')
-    
+    <script type="text/javascript">
+        var ctx = document.getElementById("myChart").getContext('2d');
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ["Total Pegawai", "laki-laki", "Perempuan", "Pegawai Aktif"],
+				datasets: [{
+					label: '# Grafik Data Pegawai DISPORA',
+					data: [{{$total}}, {{$laki}}, {{$ladies}}, {{$aktif}}],
+					backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)'
+
+					],
+					borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+
+        // Cuti
+        var ctx = document.getElementById("absen").getContext('2d');
+		var absen = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ["Masuk", "Izin","Sakit"],
+				datasets: [{
+					label: '# Grafik Data Absen Pegawai DISPORA',
+					data: [{{$hadir}}, {{$izin}}, {{$Sakit}}],
+					backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+
+					],
+					borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				}
+			}
+		});
+    </script>
 @endsection

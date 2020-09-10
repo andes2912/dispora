@@ -78,6 +78,10 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('mutasi-approve','Kadis\VerifikasiController@mutasi_approve');
     Route::get('mutasi-reject','Kadis\VerifikasiController@mutasi_reject');
 
+    // Laporan
+    Route::get('laporan-pegawai-kadis','Kadis\LaporanController@laporan_kadis');
+    Route::get('laporan-pegawai-kadis-f','Kadis\LaporanController@filter_laporan');
+
 // PEGAWAI
     // Absensi
     Route::resource('absensi','Pegawai\AbsenPegawaiController');

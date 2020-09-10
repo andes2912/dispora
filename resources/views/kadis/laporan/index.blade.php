@@ -13,20 +13,24 @@
             <div class="row">
                 <div class="col-md-4">
                     <label>Filter :</label>
-                    <select name="" id="" class="form-control">
-                        <option selected disabled>Select</option>
-                        <option value=""></option>
+                    <select name="jabatan" id="jabatan" class="form-control">
+                        <option value="0">Select</option>
+                        @php
+                            $jabatan = App\pangkat::select('jabatan')->get();
+                        @endphp
+                        @foreach ($jabatan as $item)
+                            <option value="{{$item->jabatan}}">{{$item->jabatan}}</option>  
+                        @endforeach
                     </select>
                 </div>
                <div class="col-md-2">
                     <label>.</label>
                     <div>
-                        <a href="" class="btn btn-success">Filter</a>
+                        <button class="btn btn-success" id="filter">Filter</button>
                     </div>
                </div>
             </div>
             <div class="table-responsive m-t-40">
-               
                 <table id="myTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -39,7 +43,7 @@
                             <td>Cetak</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="refresh_tbody">
                         @php
                             $no = 1;
                         @endphp
@@ -65,4 +69,15 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+        $("#filter").click(function(){
+            var jabatan = $("#jabatan").val();
+
+            $.get('laporan-pegawai-kadis-f',{'_token': $('meta[name=csrf-token]').attr('content'),jabatan:jabatan}, function(resp){
+            $("#refresh_tbody").html(resp); 
+            });
+        });
+    </script>
 @endsection
