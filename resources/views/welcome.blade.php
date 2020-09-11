@@ -90,7 +90,7 @@
                 </div>
 
                <p style="font-size:20px">
-                   SISTEM KEPEGAWAIAN DINAS PEMUDA DAN OLAHRAGA (DISPORA) <br>
+                   SISTEM INFORMASI KEPEGAWAIAN DINAS PEMUDA DAN OLAHRAGA (DISPORA) <br>
                    PROVINSI DKI JAKARTA
                </p>
             </div>
