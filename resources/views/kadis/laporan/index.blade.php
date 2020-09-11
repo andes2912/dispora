@@ -11,10 +11,10 @@
             </h4>
 
             <div class="row">
-                <div class="col-md-4">
-                    <label>Filter :</label>
+                <div class="col-md-3">
+                    <label>Filter Jabatan :</label>
                     <select name="jabatan" id="jabatan" class="form-control">
-                        <option value="0">Select</option>
+                        <option value="">Select</option>
                         @php
                             $jabatan = App\pangkat::select('jabatan')->get();
                         @endphp
@@ -23,10 +23,23 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-3">
+                    <label>Filter Golongan:</label>
+                    <select name="golongan" id="golongan" class="form-control">
+                        <option value="">Select</option>
+                        @php
+                            $golongan = App\pangkat::select('golongan')->get();
+                        @endphp
+                        @foreach ($golongan as $item)
+                            <option value="{{$item->golongan}}">{{$item->golongan}}</option>  
+                        @endforeach
+                    </select>
+                </div>
                <div class="col-md-2">
                     <label>.</label>
                     <div>
                         <button class="btn btn-success" id="filter">Filter</button>
+                        <button class="btn btn-info" id="cetak">Cetak</button>
                     </div>
                </div>
             </div>
@@ -72,12 +85,72 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-        $("#filter").click(function(){
+        // filter 
+        $(document).on('click', '#filter', function (e) { 
             var jabatan = $("#jabatan").val();
-
-            $.get('laporan-pegawai-kadis-f',{'_token': $('meta[name=csrf-token]').attr('content'),jabatan:jabatan}, function(resp){
-            $("#refresh_tbody").html(resp); 
+            var golongan = $("#golongan").val();
+            $.get('{{ Url("laporan-pegawai-kadis-f") }}',{'_token': $('meta[name=csrf-token]').attr('content'),jabatan:jabatan,golongan:golongan}, function(resp){  
+            $("#refresh_tbody").html(resp);
             });
+        });
+
+        // Download
+        $(document).on('click', '#cetak', function(e){
+        e.preventDefault();
+        if(e.which===1){
+            var jabatan = $("#jabatan").val();
+            var golongan = $("#golongan").val();
+        $.ajax({
+                cache: false,
+                type: 'GET',
+                url: 'laporan-pegawai-kadis-down',
+                contentType: false,
+                processData: false,
+                data: 'jabatan=' + jabatan + '&golongan=' + golongan,
+                //xhrFields is what did the trick to read the blob to pdf
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (response, status, xhr) {
+                    var filename = "";                   
+                    var disposition = xhr.getResponseHeader('Content-Disposition');
+                    if (disposition) {
+                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        var matches = filenameRegex.exec(disposition);
+                        if (matches !== null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+                    } 
+                    var linkelem = document.createElement('a');
+                    try {
+                        var blob = new Blob([response], { type: 'application/octet-stream' });                        
+                        if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                            //   IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+                            window.navigator.msSaveBlob(blob, filename);
+                        } else {
+                            var URL = window.URL || window.webkitURL;
+                            var downloadUrl = URL.createObjectURL(blob);
+                            if (filename) { 
+                                // use HTML5 a[download] attribute to specify filename
+                                var a = document.createElement("a");
+                                // safari doesn't support this yet
+                                if (typeof a.download === 'undefined') {
+                                    window.location = downloadUrl;
+                                } else {
+                                    a.href = downloadUrl;
+                                    a.download = filename;
+                                    document.body.appendChild(a);
+                                    a.target = "_blank";
+                                    a.click();
+                                }
+                            } else {
+                                window.location = downloadUrl;
+                            }
+                        }   
+                    } catch (ex) {
+                        console.log(ex);
+                    } 
+                }
+                });
+            }
         });
     </script>
 @endsection

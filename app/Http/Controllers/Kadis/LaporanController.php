@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use PDF;
 
 class LaporanController extends Controller
 {
@@ -26,24 +27,49 @@ class LaporanController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role == 'Kadis') {
-                $pegawai = User::selectRaw('Users.*,a.jabatan')
+                $pegawai = User::selectRaw('Users.*,a.jabatan,a.golongan')
                 ->leftJoin('pangkats as a','a.user_id','=','Users.id')
                 ->where('a.jabatan', $request->jabatan)
+                ->orWhere('a.golongan', $request->golongan)
                 ->get();
 
                 $return = "";
+                $no=1;
                 foreach ($pegawai as $item) {
                     $return .= "<tr>
+                            <td> ".$no."</td>
                             <td> ".$item->nip."</td>
                             <td> ".$item->name."</td>
                             <td> ".$item->pegawai->kelamin."</td>
                             <td> ".$item->pangkat->jabatan."</td>
                             <td> ".$item->pegawai->agama."</td>
+                            <td>
+                                <i class='fa fa-print'></i>
+                            </td>
                             ";
                     $return .= "</td>
                             </tr>";
+                    $no++;
                 }
                 return $return;
+            }
+        }
+    }
+
+    // Download
+    public function down_laporan(Request $request)
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Kadis') {
+                $pegawai = User::selectRaw('Users.*,a.jabatan,a.golongan')
+                ->leftJoin('pangkats as a','a.user_id','=','Users.id')
+                ->where('a.jabatan', $request->jabatan)
+                ->orWhere('a.golongan', $request->golongan)
+                ->get();
+
+                $pdf = PDF::loadView('admin.laporan.pegawaiPDF',['pegawai' => $pegawai]);
+                $pdf->setPaper('A4', 'landscape');
+                    return $pdf->download('pegawaiPDF.pdf');
             }
         }
     }

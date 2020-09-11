@@ -81,6 +81,7 @@ Route::get('/home', 'HomeController@index')->name('home');
     // Laporan
     Route::get('laporan-pegawai-kadis','Kadis\LaporanController@laporan_kadis');
     Route::get('laporan-pegawai-kadis-f','Kadis\LaporanController@filter_laporan');
+    Route::get('laporan-pegawai-kadis-down','Kadis\LaporanController@down_laporan');
 
 // PEGAWAI
     // Absensi
