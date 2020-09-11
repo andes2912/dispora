@@ -35,6 +35,14 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-3">
+                    <label>Filter Status:</label>
+                    <select name="status" id="status" class="form-control">
+                        <option value="">Select</option>
+                        <option value="Pensiun">Pensiun</option>
+                        <option value="Aktif">Aktif</option>
+                    </select>
+                </div>
                <div class="col-md-2">
                     <label>.</label>
                     <div>
@@ -90,7 +98,8 @@
         $(document).on('click', '#filter', function (e) { 
             var jabatan = $("#jabatan").val();
             var golongan = $("#golongan").val();
-            $.get('{{ Url("laporan-pegawai-kadis-f") }}',{'_token': $('meta[name=csrf-token]').attr('content'),jabatan:jabatan,golongan:golongan}, function(resp){  
+            var status = $("#status").val();
+            $.get('{{ Url("laporan-pegawai-kadis-f") }}',{'_token': $('meta[name=csrf-token]').attr('content'),jabatan:jabatan,golongan:golongan,status:status}, function(resp){  
             $("#refresh_tbody").html(resp);
             });
         });
