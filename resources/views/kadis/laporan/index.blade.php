@@ -35,6 +35,14 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-3">
+                    <label>Filter Status:</label>
+                    <select name="status" id="status" class="form-control">
+                        <option value="">Select</option>
+                        <option value="Pensiun">Pensiun</option>
+                        <option value="Aktif">Aktif</option>
+                    </select>
+                </div>
                <div class="col-md-2">
                     <label>.</label>
                     <div>
@@ -89,7 +97,9 @@
         $(document).on('click', '#filter', function (e) { 
             var jabatan = $("#jabatan").val();
             var golongan = $("#golongan").val();
-            $.get('{{ Url("laporan-pegawai-kadis-f") }}',{'_token': $('meta[name=csrf-token]').attr('content'),jabatan:jabatan,golongan:golongan}, function(resp){  
+            var status = $("#status").val();
+
+            $.get('{{ Url("laporan-pegawai-kadis-f") }}',{'_token': $('meta[name=csrf-token]').attr('content'),jabatan:jabatan,golongan:golongan,status:status}, function(resp){  
             $("#refresh_tbody").html(resp);
             });
         });
@@ -99,14 +109,16 @@
         e.preventDefault();
         if(e.which===1){
             var jabatan = $("#jabatan").val();
-            var golongan = $("#golongan").val();
+            var status = $("#status").val();
+            var status = $("#status").val();
+
         $.ajax({
                 cache: false,
                 type: 'GET',
                 url: 'laporan-pegawai-kadis-down',
                 contentType: false,
                 processData: false,
-                data: 'jabatan=' + jabatan + '&golongan=' + golongan,
+                data: 'jabatan=' + jabatan + '&golongan=' + golongan + '&status=' + status,
                 //xhrFields is what did the trick to read the blob to pdf
                 xhrFields: {
                     responseType: 'blob'

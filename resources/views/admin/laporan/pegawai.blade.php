@@ -110,13 +110,15 @@
         if(e.which===1){
             var jabatan = $("#jabatan").val();
             var golongan = $("#golongan").val();
+            var status = $("#status").val();
+
         $.ajax({
                 cache: false,
                 type: 'GET',
                 url: 'laporan-pegawai-kadis-down',
                 contentType: false,
                 processData: false,
-                data: 'jabatan=' + jabatan + '&golongan=' + golongan,
+                data: 'jabatan=' + jabatan + '&golongan=' + golongan + '&status=' + status,
                 //xhrFields is what did the trick to read the blob to pdf
                 xhrFields: {
                     responseType: 'blob'

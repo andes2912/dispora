@@ -64,6 +64,7 @@ class LaporanController extends Controller
                 ->leftJoin('pangkats as a','a.user_id','=','Users.id')
                 ->where('a.jabatan', $request->jabatan)
                 ->orWhere('a.golongan', $request->golongan)
+                ->orWhere('Users.status', $request->status)
                 ->get();
 
                 $pdf = PDF::loadView('admin.laporan.pegawaiPDF',['pegawai' => $pegawai]);
