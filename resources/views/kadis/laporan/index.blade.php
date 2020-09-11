@@ -16,7 +16,7 @@
                     <select name="jabatan" id="jabatan" class="form-control">
                         <option value="">Select</option>
                         @php
-                            $jabatan = App\pangkat::select('jabatan')->get();
+                            $jabatan = App\pangkat::select('jabatan')->groupBy('jabatan')->get();
                         @endphp
                         @foreach ($jabatan as $item)
                             <option value="{{$item->jabatan}}">{{$item->jabatan}}</option>  
@@ -28,10 +28,10 @@
                     <select name="golongan" id="golongan" class="form-control">
                         <option value="">Select</option>
                         @php
-                            $golongan = App\pangkat::select('golongan')->get();
+                            $golongan = App\pangkat::select('golongan')->groupBy('golongan')->get();
                         @endphp
                         @foreach ($golongan as $item)
-                            <option value="{{$item->golongan}}">{{$item->golongan}}</option>  
+                            <option value="{{$item->golongan}}">Golongan {{$item->golongan}}</option>  
                         @endforeach
                     </select>
                 </div>
@@ -53,7 +53,7 @@
                             <th>Kelamin</th>
                             <th>Jabatan</th>
                             <th>Agama</th>
-                            <td>Cetak</td>
+                            {{-- <td>Cetak</td> --}}
                         </tr>
                     </thead>
                     <tbody id="refresh_tbody">
@@ -68,9 +68,9 @@
                                 <td>{{$item->pegawai->kelamin}}</td>
                                 <td>{{$item->pangkat->jabatan ?? '' }}</td>
                                 <td>{{$item->pegawai->agama}}</td>
-                                <td>
+                                {{-- <td>
                                     <i class="fa fa-print"></i>
-                                </td>
+                                </td> --}}
                             </tr>
                         @php
                             $no++;

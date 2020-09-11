@@ -26,7 +26,7 @@ class LaporanController extends Controller
     public function filter_laporan(Request $request)
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Kadis') {
+            if (Auth::user()->role == 'Kadis' || Auth::user()->role == 'Admin') {
                 $pegawai = User::selectRaw('Users.*,a.jabatan,a.golongan')
                 ->leftJoin('pangkats as a','a.user_id','=','Users.id')
                 ->where('a.jabatan', $request->jabatan)
@@ -43,9 +43,7 @@ class LaporanController extends Controller
                             <td> ".$item->pegawai->kelamin."</td>
                             <td> ".$item->pangkat->jabatan."</td>
                             <td> ".$item->pegawai->agama."</td>
-                            <td>
-                                <i class='fa fa-print'></i>
-                            </td>
+                          
                             ";
                     $return .= "</td>
                             </tr>";
@@ -60,7 +58,7 @@ class LaporanController extends Controller
     public function down_laporan(Request $request)
     {
         if (Auth::check()) {
-            if (Auth::user()->role == 'Kadis') {
+            if (Auth::user()->role == 'Kadis' || Auth::user()->role == 'Admin') {
                 $pegawai = User::selectRaw('Users.*,a.jabatan,a.golongan')
                 ->leftJoin('pangkats as a','a.user_id','=','Users.id')
                 ->where('a.jabatan', $request->jabatan)

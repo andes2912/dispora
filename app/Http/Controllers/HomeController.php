@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\{Pegawai,User,cuti,cuti_taken,cuti_count,Absen};
 use Auth;
+use Carbon\carbon;
 
 class HomeController extends Controller
 {
@@ -41,13 +42,13 @@ class HomeController extends Controller
                 $aktif = User::where('status','Aktif')->whereIn('role',['Kadis','Pegawai','Admin'])->count();
 
                 // Masuk
-                $hadir = Absen::where('status','Hadir')->count();
+                $hadir = Absen::where('status','Hadir')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
                 // Izin
-                $izin = Absen::where('status','Izin')->count();
+                $izin = Absen::where('status','Izin')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
                  // Sakit
-                 $Sakit = Absen::where('status','Sakit')->count();
+                 $Sakit = Absen::where('status','Sakit')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
                 return view('admin.home', compact('total','laki','ladies','aktif','hadir','izin','Sakit'));
             // End Admin
@@ -90,13 +91,13 @@ class HomeController extends Controller
                  $aktif = User::where('status','Aktif')->whereIn('role',['Kadis','Pegawai','Admin'])->count();
 
                  // Masuk
-                $hadir = Absen::where('status','Hadir')->count();
+                $hadir = Absen::where('status','Hadir')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
                 // Izin
-                $izin = Absen::where('status','Izin')->count();
+                $izin = Absen::where('status','Izin')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
                  // Sakit
-                 $Sakit = Absen::where('status','Sakit')->count();
+                 $Sakit = Absen::where('status','Sakit')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
                 return view('kadis.home',compact('total','laki','ladies','aktif','hadir','izin','Sakit'));
             }

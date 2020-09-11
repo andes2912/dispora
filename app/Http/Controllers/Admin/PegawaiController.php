@@ -243,7 +243,7 @@ class PegawaiController extends Controller
             if (Auth::user()->role == "Admin" && auth::user()->status == "Aktif") {
                 $resetpw = User::find($request->user_id);
                 $resetpw->update([
-                    'password' => bcrypt(1234567),
+                    'password' => bcrypt(12345678),
                 ]);
 
                 return $resetpw;
