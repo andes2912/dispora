@@ -174,6 +174,7 @@
                                     <a class="has-arrow " href="#" aria-expanded="false"><i class="fa fa-download"></i><span class="hide-menu">Laporan</span></a>
                                     <ul>
                                         <li><a href="{{url('laporan-pegawai')}}">Pegawai</a></li>
+                                        <li><a href="{{url('laporan-absensi')}}">Absensi</a></li>
                                     </ul>
                                 </li>
                             @endif

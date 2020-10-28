@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use PDF;
+use Carbon\carbon;
 
 class LaporanController extends Controller
 {
@@ -22,7 +23,7 @@ class LaporanController extends Controller
         
     }
 
-    // Filter Laporan
+    // Filter Laporan #jabatan #golongan #status
     public function filter_laporan(Request $request)
     {
         if (Auth::check()) {
@@ -44,6 +45,35 @@ class LaporanController extends Controller
                             <td> ".$item->pegawai->kelamin."</td>
                             <td> ".$item->pangkat->jabatan."</td>
                             <td> ".$item->pegawai->agama."</td>
+                          
+                            ";
+                    $return .= "</td>
+                            </tr>";
+                    $no++;
+                }
+                return $return;
+            }
+        }
+    }
+
+    // Filter Laporan #Absensi
+    public function filter_laporan_absen(Request $request)
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role == 'Kadis' || Auth::user()->role == 'Admin') {
+                $absensi = User::selectRaw('Users.*,a.status')
+                ->leftJoin('Absens as a','a.user_id','=','Users.id')
+                ->where('a.status', $request->status)
+                ->where('a.tgl', Carbon::now()->format('d-m-Y'))
+                ->get();
+
+                $return = "";
+                $no=1;
+                foreach ($absensi as $item) {
+                    $return .= "<tr>
+                            <td> ".$no."</td>
+                            <td> ".$item->nip."</td>
+                            <td> ".$item->name."</td>
                           
                             ";
                     $return .= "</td>
