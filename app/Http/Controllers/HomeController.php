@@ -102,7 +102,10 @@ class HomeController extends Controller
                  // Sakit
                  $Sakit = Absen::where('status','Sakit')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
-                return view('kadis.home',compact('total','laki','ladies','aktif','hadir','izin','Sakit'));
+                 // Pensiun
+                $pensiun = User::where('status','Pensiun')->count();
+
+                return view('kadis.home',compact('total','laki','ladies','aktif','hadir','izin','Sakit','pensiun'));
             }
         }
     }
