@@ -24,7 +24,7 @@ class AbsenPegawaiController extends Controller
         if (auth()->check()) {
             if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
                 $cek = Pegawai::where('user_id',auth::user()->id)->first();
-                $cekabsen = Absen::where('user_id',$cek->id)->first();
+                $cekabsen = Absen::where('user_id',$cek->id)->Where('tgl', Carbon::now()->format('d-m-Y'))->first();
                 $absen = Absen::where('user_id',$cek->id)->get();
                 $date = Carbon::now()->format('d-m-Y');
                 $jam = Carbon::now()->format('h:i:s');
@@ -66,6 +66,14 @@ class AbsenPegawaiController extends Controller
     {
         if (auth()->check()) {
             if (auth::user()->role == "Pegawai" && Auth::user()->status == 'Aktif') {
+                $document = $request->file('document');
+                if ($document) {
+                    $documents = time()."_".$document->getClientoriginalName();
+                    // Folder Penyimpanan
+                    $tujuan_upload = 'document_pegawai';
+                    $document->move($tujuan_upload, $documents);
+                }
+
                 $absen = New Absen;
                 $absen->user_id = Auth::user()->id;
                 $absen->nip = Auth::user()->nip;
@@ -74,6 +82,9 @@ class AbsenPegawaiController extends Controller
                 $absen->jam_masuk = carbon::now()->format('h:i:s');
                 $absen->status = $request->status;
                 $absen->keterangan = $request->keterangan;
+                if ($document) {
+                    $absen->document = $documents;
+                }
                 $absen->save();
 
                 return redirect('absensi');
