@@ -111,22 +111,24 @@ var ctx = document.getElementById("myChart").getContext('2d');
 		var myChart = new Chart(ctx, {
 			type: 'bar',
 			data: {
-				labels: ["Total Pegawai", "laki-laki", "Perempuan", "Pegawai Aktif"],
+				labels: ["Total Pegawai", "laki-laki", "Perempuan", "Pegawai Aktif","Pegawai Pensiun"],
 				datasets: [{
 					label: '# Grafik Data Pegawai DISPORA',
-					data: [{{$total}}, {{$laki}}, {{$ladies}}, {{$aktif}}],
+					data: [{{$total}}, {{$laki}}, {{$ladies}}, {{$aktif}}, {{$pensiun}}],
 					backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
 					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)'
+					'rgba(75, 192, 192, 0.2)',
+                    'rgba(51, 102, 0, 0.2)'
 
 					],
 					borderColor: [
 					'rgba(255,99,132,1)',
 					'rgba(54, 162, 235, 1)',
 					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)'
+					'rgba(75, 192, 192, 1)',
+					'rgba(0, 102, 0, 1)'
 					],
 					borderWidth: 1
 				}]
@@ -147,22 +149,20 @@ var ctx = document.getElementById("myChart").getContext('2d');
 		var absen = new Chart(ctx, {
 			type: 'bar',
 			data: {
-				labels: ["Masuk", "Izin","Sakit","Pensiun"],
+				labels: ["Masuk", "Izin","Sakit"],
 				datasets: [{
 					label: '# Grafik Data Absen Pegawai DISPORA',
-					data: [{{$hadir}}, {{$izin}}, {{$Sakit}}, {{$pensiun}}],
+					data: [{{$hadir}}, {{$izin}}, {{$Sakit}}],
 					backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)'
 
 					],
 					borderColor: [
 					'rgba(255,99,132,1)',
 					'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)'
 					],
 					borderWidth: 1
 				}]

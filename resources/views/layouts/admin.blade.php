@@ -330,7 +330,7 @@
                         icon: "success",
                         button: true
                     }));
-                    swal(JSON.parse(localStorage.getItem("swal"))).then(() => location.reload());
+                    swal(JSON.parse(localStorage.getItem("swal"))).then(() => window.location.href = "/home");
             });
         });
     </script>
