@@ -9,7 +9,7 @@
                 <h4 class="m-b-0 text-black">Input Data Cuti Pegawai</h4>
             </div>
                 <div class="card-body">
-                    <form action="{{route('cuti-pegawai.store')}}" method="post">
+                    <form action="{{route('cuti-pegawai.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="form-body">
                             <div class="row">
@@ -55,7 +55,7 @@
                                         <textarea name="reason" rows="3" class="form-control border-primary" required autocomplete="off"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <label class="control-label">Mengetahui</label>
                                         <select name="id_approval" id="id" class="form-control" required>
@@ -64,6 +64,12 @@
                                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Document</label>
+                                        <input type="file" class="form-control" name="document">
                                     </div>
                                 </div>
                                 <div class="col-lg-6" hidden>

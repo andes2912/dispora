@@ -20,6 +20,7 @@ class CreateCutisTable extends Migration
             $table->string('nama');
             $table->string('date');
             $table->string('reason');
+            $table->string('document')->nullable();
             $table->integer('id_approval')->nullable();
             $table->string('nama_approval')->nullable();
             $table->string('date_approval')->nullable();

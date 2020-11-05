@@ -23,6 +23,7 @@ class CreateAbsensTable extends Migration
             $table->string('jam_keluar')->nullable();
             $table->string('status');
             $table->string('keterangan')->nullable();
+            $table->string('document')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -32,6 +32,9 @@
                                 <td>{{$item->status_approval}}</td>
                                 <td>
                                     <a href="{{route('cuti.show', $item->id)}}" class="btn btn-warning btn-sm">Lihat</a>
+                                    @if ($item->document)
+                                        <a href="{{asset('document_pegawai/'. $item->document)}}" class="btn btn-info btn-sm">File</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

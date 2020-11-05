@@ -53,6 +53,14 @@ class CutiPegawaiController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                $document = $request->file('document');
+                if ($document) {
+                    $documents = time()."_".$document->getClientoriginalName();
+                    // Folder Penyimpanan
+                    $tujuan_upload = 'document_pegawai';
+                    $document->move($tujuan_upload, $documents);
+                }
+
                 $cuti = new cuti;
                 $cuti->id = $request->id;
                 $cuti->user_id = auth::user()->id;
@@ -63,6 +71,9 @@ class CutiPegawaiController extends Controller
                 $cuti->status_approval = 'Proses';
                 $cuti->id_approval = $request->id_approval;
                 $cuti->nama_approval = $request->nama_approval;
+                if ($document) {
+                    $cuti->document = $documents;
+                }
         
                 if ($cuti->Save()) {
                     foreach ($request->add_date as $value) {
