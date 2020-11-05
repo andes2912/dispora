@@ -286,4 +286,16 @@ class PegawaiController extends Controller
             }
         }
     }
+
+    // Laporan Absensi #cuti #
+    public function laporanA()
+    {
+        if (Auth::check()) {
+            if (Auth::user()->role == "Admin") {
+                $absensi = User::with('pegawai')->get();
+                return view('admin.laporan.absensi', compact('absensi'));
+            }
+        }
+        
+    }
 }

@@ -60,10 +60,11 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('select-gaji-pensiun','Admin\PensiunController@select_gaji_pensiun');
     Route::get('select-tunjangan-pensiun','Admin\PensiunController@select_tunjangan_pensiun');
 
-    // Laporan
+    // Laporan 
     Route::get('laporan-pegawai','Admin\PegawaiController@laporanP');
     Route::get('get-pdf','Admin\PegawaiController@getPDF');
     Route::get('get-excel','Admin\PegawaiController@getEXCEL');
+    Route::get('laporan-absensi','Admin\PegawaiController@laporanA');
 
 // KADIS
     // Verifikasi
@@ -82,6 +83,7 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('laporan-pegawai-kadis','Kadis\LaporanController@laporan_kadis');
     Route::get('laporan-pegawai-kadis-f','Kadis\LaporanController@filter_laporan');
     Route::get('laporan-pegawai-kadis-down','Kadis\LaporanController@down_laporan');
+    Route::get('filter-laporan-absensi','Kadis\LaporanController@filter_laporan_absen');
 
 // PEGAWAI
     // Absensi
