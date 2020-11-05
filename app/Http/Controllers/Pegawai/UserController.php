@@ -60,7 +60,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('pegawai.bio.edit');
+        if (Auth::user()->status == 'Aktif') {
+            return view('pegawai.bio.edit');
+        } else {
+            return \redirect('home');
+        }
         
     }
 
@@ -73,35 +77,37 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $foto = $request->file('foto');
-        if ($foto) {
-            $fotos = time()."_".$foto->getClientoriginalName();
-            // Folder Penyimpanan
-            $tujuan_upload = 'foto_pegawai';
-            $foto->move($tujuan_upload, $fotos);
-        }
+        if (Auth::user()->status =='Aktif') {
+            $foto = $request->file('foto');
+            if ($foto) {
+                $fotos = time()."_".$foto->getClientoriginalName();
+                // Folder Penyimpanan
+                $tujuan_upload = 'foto_pegawai';
+                $foto->move($tujuan_upload, $fotos);
+            }
 
-        $pegawai = Pegawai::findOrFail($id);
-        $pegawai->tipepns = $request->tipepns;
-        $pegawai->ttl = $request->ttl;
-        $pegawai->tempatlahir = $request->tempatlahir;
-        $pegawai->kelamin = $request->kelamin;
-        $pegawai->agama = $request->agama;
-        $pegawai->statusnikah = $request->statusnikah;
-        $pegawai->kedudukanpns = $request->kedudukanpns;
-        $pegawai->goldarah = $request->goldarah;
-        $pegawai->noaskes = $request->noaskes;
-        $pegawai->notaspen = $request->notaspen;
-        $pegawai->nonpwp = $request->nonpwp;
-        $pegawai->alamat = $request->alamat;
-        $pegawai->nokarsuskaris = $request->nokarsuskaris;
-        $pegawai->nik = $request->nik;
-        if ($foto) {
-            $pegawai->foto = $fotos;
-        }
-        $pegawai->save();
+            $pegawai = Pegawai::findOrFail($id);
+            $pegawai->tipepns = $request->tipepns;
+            $pegawai->ttl = $request->ttl;
+            $pegawai->tempatlahir = $request->tempatlahir;
+            $pegawai->kelamin = $request->kelamin;
+            $pegawai->agama = $request->agama;
+            $pegawai->statusnikah = $request->statusnikah;
+            $pegawai->kedudukanpns = $request->kedudukanpns;
+            $pegawai->goldarah = $request->goldarah;
+            $pegawai->noaskes = $request->noaskes;
+            $pegawai->notaspen = $request->notaspen;
+            $pegawai->nonpwp = $request->nonpwp;
+            $pegawai->alamat = $request->alamat;
+            $pegawai->nokarsuskaris = $request->nokarsuskaris;
+            $pegawai->nik = $request->nik;
+            if ($foto) {
+                $pegawai->foto = $fotos;
+            }
+            $pegawai->save();
 
-        return redirect('akun/' .$id.'');
+            return redirect('akun/' .$id.'');
+        }
     }
 
     /**
