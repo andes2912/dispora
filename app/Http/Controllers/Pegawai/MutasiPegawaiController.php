@@ -60,6 +60,14 @@ class MutasiPegawaiController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
+                $document = $request->file('document');
+                if ($document) {
+                    $documents = time()."_".$document->getClientoriginalName();
+                    // Folder Penyimpanan
+                    $tujuan_upload = 'document_pegawai';
+                    $document->move($tujuan_upload, $documents);
+                }
+
                 $mutasi = new mutasi;
                 $mutasi->pangkat_id = $request->pangkat_id;
                 $mutasi->nip = Auth::user()->nip;
@@ -71,6 +79,9 @@ class MutasiPegawaiController extends Controller
                 $mutasi->jabatan_lama = $request->jabatan_lama;
                 $mutasi->jabatan_baru = $request->jabatan_baru;
                 $mutasi->status = '0';
+                if ($document) {
+                    $mutasi->document = $documents;
+                }
                 $mutasi->save();
 
                 return redirect('mutasi-pegawai');

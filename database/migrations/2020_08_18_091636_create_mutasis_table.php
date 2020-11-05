@@ -19,6 +19,7 @@ class CreateMutasisTable extends Migration
             $table->string('nip');
             $table->string('nama');
             $table->string('no_surat');
+            $table->string('document');
             $table->string('perihal');
             $table->string('tgl_mutasi');
             $table->string('tgl_masuk');

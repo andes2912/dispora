@@ -8,7 +8,7 @@
                     <h4 class="m-b-0 text-black">Input Data Mutasi Pegawai</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('mutasi-pegawai.store')}}" method="post">
+                    <form action="{{route('mutasi-pegawai.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                         <div class="form-body">
                             <div class="row">
@@ -27,28 +27,34 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label">No Surat</label>
-                                        <input type="text" name="no_surat" class="form-control border-primary" required>
+                                        <input type="text" name="no_surat" class="form-control border-primary" placeholder="Nomor Surat" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form">
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label class="control-label">Jabatan Baru</label>
-                                            <input type="text" name="jabatan_baru" class="form-control border-primary" required>
+                                            <input type="text" name="jabatan_baru" class="form-control border-primary" placeholder="Jabatan Baru" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label class="control-label">Tanggal Mutasi</label>
-                                            <input type="text" name="tgl_mutasi" class="form-control border-primary datepicker" autocomplete="off" required>
+                                            <input type="text" name="tgl_mutasi" class="form-control border-primary datepicker" autocomplete="off" placeholder="Tanggal Mutasi" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
                                             <label class="control-label">Tanggal Masuk</label>
-                                            <input type="text" name="tgl_masuk" class="form-control border-primary datepicker" autocomplete="off" required>
+                                            <input type="text" name="tgl_masuk" class="form-control border-primary datepicker" autocomplete="off" placeholder="Tanggal Masuk" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Document</label>
+                                            <input type="file" name="document" class="form-control border-primary" required>
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +65,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="control-label">Alasan</label>
-                                        <textarea name="perihal" rows="3" class="form-control border-primary"></textarea>
+                                        <textarea name="perihal" rows="3" class="form-control border-primary" placeholder="Tulis Alasan" required></textarea>
                                     </div>
                                 </div>
                             </div>

@@ -48,6 +48,11 @@
                                         <button id="reject_mutasi" data-id-reject-mutasi="{{$item->id}}" class="btn btn-danger btn-sm">
                                             <i class="fa fa-close"></i>
                                         </button>
+                                        @if ($item->document)
+                                            <a href="{{asset('document_pegawai/' . $item->document)}}" class="btn btn-success btn-sm">
+                                                <i class="fa fa-file"></i>
+                                            </a>
+                                        @endif
                                     @endif
                                 </td>
                             </tr>
