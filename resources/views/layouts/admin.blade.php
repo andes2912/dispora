@@ -20,12 +20,12 @@
     <link href="{{asset('assets/css/colors/blue.css')}}" id="theme" rel="stylesheet">
     <link href="{{asset('assets/plugins/morrisjs/morris.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    {{-- Custom --}}
+        <style>
+            .hidden {
+                display: none;
+            }
+        </style>
 </head>
 
 <body class="fix-header card-no-border">
@@ -220,7 +220,7 @@
              <br>
                 <div class="container-fluid">
                     @if (Auth::user()->status == 'Aktif')
-                        @if ($cek_pensiun->nip == Auth::user()->nip)
+                        @if (@$cek_pensiun->nip == Auth::user()->nip)
                             @if ($cek_pensiun->date_pensiun == Carbon\carbon::now()->format('d-m-Y'))
                                 <!-- Modal Pensiun-->
                                 <div class="modal fade" id="modal_pensiun" tabindex="-1" role="dialog" aria-labelledby="modal_pensiun" aria-hidden="true">
@@ -230,7 +230,7 @@
                                         <h5 class="modal-title" id="modal_pensiun">Akun Anda Sudah Pensiun</h5>
                                         </div>
                                         <div class="modal-body">
-                                        ...
+                                        <p style="color:red">Akun anda sudah tidak dapat mengakses fitur-fitur di halaman ini lagi karena sudah pensiun!</p>
                                         </div>
                                         <div class="modal-footer">
                                         <button type="submit" id="pensiun_proses" data-id="{{Auth::user()->id}}" class="btn btn-primary">Oke</button>
@@ -239,8 +239,15 @@
                                     </div>
                                 </div>
                             @else
+                            <div class="hidden">
+                                @php
+                                    $date_pensiun = Carbon\carbon::parse($cek_pensiun->date_pensiun);
+                                    $now = Carbon\carbon::now()->format('d-m-Y');
+                                    $diff = $date_pensiun->diffInDays($now);
+                                @endphp
+                            </div>
                             <div class="col-12 alert alert-danger alert-rounded">
-                                Akun Ini Akan Pensiun di Tanggal {{$cek_pensiun->date_pensiun}} !
+                                Akun Ini Akan Pensiun di Tanggal {{$cek_pensiun->date_pensiun}} atau {{$diff}} hari lagi !
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
                                     <span aria-hidden="true">&times;</span> 
                                 </button>

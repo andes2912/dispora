@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Pegawai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\{mutasi,pangkat,User};
+use App\{mutasi,pangkat,User,pensiun};
 use Auth;
 
 class MutasiPegawaiController extends Controller
@@ -37,7 +37,13 @@ class MutasiPegawaiController extends Controller
         if (Auth::check()) {
             if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
                 $cek_kadis = User::where('role','Kadis')->first();
-                return view('pegawai.mutasi.create', compact('cek_kadis'));
+                $cek_mutasi = mutasi::where('nip', Auth::user()->nip)->first();
+                $cek_pensiun = pensiun::where('nip',Auth::user()->nip)->first();
+                if (!$cek_mutasi && !$cek_pensiun) {
+                    return view('pegawai.mutasi.create', compact('cek_kadis'));
+                } else {
+                    return redirect('home');
+                }
             }
         } else {
             return redirect('home');

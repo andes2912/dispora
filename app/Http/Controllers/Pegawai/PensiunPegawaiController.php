@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pegawai;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\{User, pensiun};
+use Carbon\carbon;
 use Auth;
 
 class PensiunPegawaiController extends Controller
@@ -36,7 +37,12 @@ class PensiunPegawaiController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role == 'Pegawai' && Auth::user()->status == 'Aktif') {
-                return view('pegawai.pensiun.create');
+                $cek_pensiun = pensiun::where('nip',Auth::user()->nip)->first();
+                if (!$cek_pensiun) {
+                    return view('pegawai.pensiun.create');
+                } else {
+                    return \redirect('home');
+                }
             }
         } else {
             return redirect('home');
@@ -58,17 +64,10 @@ class PensiunPegawaiController extends Controller
                 $pensiun->pangkat_id = $request->pangkat_id;
                 $pensiun->nip = $request->nip;
                 $pensiun->nama = $request->nama;
-                $pensiun->date_pensiun = $request->date_pensiun;
+                $pensiun->date_pensiun = Carbon::parse($request->date_pensiun)->format('d-m-Y');
                 $pensiun->golongan = $request->golongan;
                 $pensiun->kelas = $request->kelas;
                 $pensiun->kedudukan = $request->kedudukan;
-
-                // if ($pensiun->save()) {
-                //     $user = User::where('nip', $pensiun->nip)->first();
-                //     $user->status = 'Pensiun';
-                //     $user->save();
-                //     // dd($pensiun, $user);
-                // }
 
                 $pensiun->save();
 

@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Schema\Builder;
 use View;
 use App\pensiun;
-use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
