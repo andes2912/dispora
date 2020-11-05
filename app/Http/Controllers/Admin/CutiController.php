@@ -61,7 +61,7 @@ class CutiController extends Controller
                 $cuti = cuti::selectRaw('cutis.id,cutis.nip,cutis.status_approval,cutis.reason,cutis.status_approval,a.nama')
                 ->leftJoin('Pegawais as a','a.nip','=','cutis.nip')
                 ->findOrFail($id);
-                $date_cuti = cuti_taken::where('id_cuti', $id)->get();
+                $date_cuti = cuti_taken::where('cuti_id', $id)->get();
                 return view('admin.cuti.view', compact('cuti','date_cuti'));
             }
         } else {

@@ -67,7 +67,7 @@ class CutiPegawaiController extends Controller
                 if ($cuti->Save()) {
                     foreach ($request->add_date as $value) {
                         $cuti_date = new cuti_taken;
-                        $cuti_date->id_cuti         = $cuti->id;
+                        $cuti_date->cuti_id         = $cuti->id;
                         $cuti_date->nip             = $cuti->nip;
                         $cuti_date->date_leave      = $value['date_leave'];
                         $cuti_date->save();
@@ -75,12 +75,12 @@ class CutiPegawaiController extends Controller
                 }
                 
                 $cek_cuti_count = cuti_count::where('nip',auth::user()->nip)->first();
-                $count = cuti_taken::where('id_cuti', $cuti->id)->get();
+                $count = cuti_taken::where('cuti_id', $cuti->id)->get();
                 if ($cuti_date->save()) {
                     if ($cek_cuti_count == null) {
                         $cuti_count = new cuti_count;
                         $cuti_count->nip = auth::user()->nip;
-                        $cuti_count->id_cuti = $cuti->id;
+                        $cuti_count->cuti_id = $cuti->id;
                         $cuti_count->nip = $cuti->nip;
                         $cuti_count->batas = 6;
                         $cuti_count->taken = $count->count();

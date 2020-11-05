@@ -66,11 +66,15 @@ class PensiunController extends Controller
                 $pensiun->gaji = $request->gaji;
                 $pensiun->tunjangan = $request->tunjangan;
 
-                if ($pensiun->save()) {
-                    $user = User::where('nip', $pensiun->nip)->first();
-                    $user->status = 'Pensiun';
-                    $user->save();
-                }
+                // if ($pensiun->save()) {
+                //     $user = User::where('nip', $pensiun->nip)->first();
+                //     $user->status = 'Pensiun';
+                //     $user->save();
+                // }
+
+                $pensiun->save();
+
+            return redirect('home');
             }
         } else {
             return redirect('home');

@@ -99,6 +99,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     // Pensiun
     Route::resource('pensiun-pegawai','Pegawai\PensiunPegawaiController');
+    Route::get('pensiun-pegawai-store','Pegawai\PensiunPegawaiController@pensiun_store');
 
     // Bio
     Route::resource('akun','Pegawai\UserController');

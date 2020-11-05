@@ -33,7 +33,7 @@
                                 <td>{{$item->nama}}</td>
                                 <td>
                                     <?php
-                                        $cutis = App\cuti_taken::where('id_cuti',$item->id)->count();
+                                        $cutis = App\cuti_taken::where('cuti_id',$item->id)->count();
                                     ?>
                                     {{$cutis}} Hari
                                 </td>

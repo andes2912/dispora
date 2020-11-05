@@ -217,8 +217,36 @@
 
         <div class="page-wrapper">
              <br>
-
-            <div class="container-fluid">
+                <div class="container-fluid">
+                    @if (Auth::user()->status == 'Aktif')
+                        @if ($cek_pensiun->nip == Auth::user()->nip)
+                            @if ($cek_pensiun->date_pensiun == Carbon\carbon::now()->format('d-m-Y'))
+                                <!-- Modal Pensiun-->
+                                <div class="modal fade" id="modal_pensiun" tabindex="-1" role="dialog" aria-labelledby="modal_pensiun" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="modal_pensiun">Akun Anda Sudah Pensiun</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                        ...
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="submit" id="pensiun_proses" data-id="{{Auth::user()->id}}" class="btn btn-primary">Oke</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            @else
+                            <div class="col-12 alert alert-danger alert-rounded">
+                                Akun Ini Akan Pensiun di Tanggal {{$cek_pensiun->date_pensiun}} !
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+                                    <span aria-hidden="true">&times;</span> 
+                                </button>
+                            </div>
+                            @endif
+                        @endif
+                    @endif
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -275,6 +303,28 @@
     <script type="text/javascript">
         $('#myTable').DataTable();
         $(".select2").select2();
+    </script>
+
+    <script type="text/javascript">
+        $('#modal_pensiun').modal({
+            show: true,
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        // Proses Ubah Status Pensiun
+        $(document).on('click','#pensiun_proses', function () {
+        var id = $(this).attr('data-id');
+            $.get(' {{Url("pensiun-pegawai-store")}}', {'_token' : $('meta[name=csrf-token]').attr('content'),id:id}, function(resp){
+                localStorage.setItem("swal", JSON.stringify({
+                        title: "Data Berhasil Di Update!",
+                        text: 'Thanks',
+                        icon: "success",
+                        button: true
+                    }));
+                    swal(JSON.parse(localStorage.getItem("swal"))).then(() => location.reload());
+            });
+        });
     </script>
     @yield('scripts')
 </body>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Pegawai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\{user, pensiun};
+use App\{User, pensiun};
 use Auth;
 
 class PensiunPegawaiController extends Controller
@@ -63,19 +63,31 @@ class PensiunPegawaiController extends Controller
                 $pensiun->kelas = $request->kelas;
                 $pensiun->kedudukan = $request->kedudukan;
 
-                if ($pensiun->save()) {
-                    $user = User::where('nip', $pensiun->nip)->first();
-                    $user->status = 'Pensiun';
-                    $user->save();
-                    // dd($pensiun, $user);
-                }
+                // if ($pensiun->save()) {
+                //     $user = User::where('nip', $pensiun->nip)->first();
+                //     $user->status = 'Pensiun';
+                //     $user->save();
+                //     // dd($pensiun, $user);
+                // }
 
-                return redirect('pensiun-pegawai');
+                $pensiun->save();
+
+                return redirect('home');
             }
         } else {
             return redirect('home');
         }
         
+    }
+
+    public function pensiun_store(Request $request)
+    {
+        $pensiun = User::find($request->id);
+        $pensiun->update([
+            'status' => 'Pensiun'
+        ]);
+
+        return $pensiun;
     }
 
     /**
