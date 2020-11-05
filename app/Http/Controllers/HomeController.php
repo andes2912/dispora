@@ -47,10 +47,13 @@ class HomeController extends Controller
                 // Izin
                 $izin = Absen::where('status','Izin')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
-                 // Sakit
+                // Sakit
                  $Sakit = Absen::where('status','Sakit')->where('tgl', carbon::now()->format('d-m-Y'))->count();
 
-                return view('admin.home', compact('total','laki','ladies','aktif','hadir','izin','Sakit'));
+                // Pensiun
+                $pensiun = User::where('status','Pensiun')->count();
+
+                return view('admin.home', compact('total','laki','ladies','aktif','hadir','izin','Sakit','pensiun'));
             // End Admin
 
             // Pegawai
