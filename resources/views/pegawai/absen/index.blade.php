@@ -30,14 +30,18 @@
                                 <td>{{$item->tgl}}</td>
                                 <td>{{$item->jam_masuk}}</td>
                                 <td>
-                                    @if ($item->jam_keluar == null)
-                                        @if ($dates >= $jam)
-                                            <button class="btn btn-primary btn-sm disabled">Keluar</button>
-                                        @else
-                                            <a class="btn btn-primary btn-sm text-white" data-id-keluar="{{$item->id}}" id="keluar">Keluar</a>
-                                        @endif
+                                    @if ($item->status == 'Sakit' || $item->status == 'Izin')
+                                    <button class="btn btn-primary btn-sm disabled">{{$item->status}}</button>
                                     @else
-                                        {{$item->jam_keluar}}
+                                        @if ($item->jam_keluar == null)
+                                            @if ($dates >= $jam)
+                                                <button class="btn btn-primary btn-sm disabled">Keluar</button>
+                                            @else
+                                                <a class="btn btn-primary btn-sm text-white" data-id-keluar="{{$item->id}}" id="keluar">Keluar</a>
+                                            @endif
+                                        @else
+                                            {{$item->jam_keluar}}
+                                        @endif
                                     @endif
                                 </td>
                                 <td>

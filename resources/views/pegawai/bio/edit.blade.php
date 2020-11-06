@@ -15,7 +15,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Nama Pegawai</label>
-                                <input type="text" name="nama" id="nama" class="form-control" value="{{Auth::user()->name}}" autocomplete="off">
+                                <input type="text" name="nama" id="nama" class="form-control" value="{{Auth::user()->name}}" autocomplete="off" readonly>
                             </div>
                         </div>
                         <!--/span-->
@@ -33,14 +33,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Nomor Induk Pegawai (NIP)</label>
-                                <input type="text" name="nip" id="nip" class="form-control" value="{{Auth::user()->nip}}" autocomplete="off">
+                                <input type="text" name="nip" id="nip" class="form-control" value="{{Auth::user()->nip}}" autocomplete="off" readonly>
                             </div>
                         </div>
                         <!--/span-->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Tipe PNS</label>
-                                <input type="text" name="tipepns" id="tipepns" class="form-control" value="{{Auth::user()->pegawai->tipepns}}" autocomplete="off">
+                                <input type="text" name="tipepns" id="tipepns" class="form-control" value="{{Auth::user()->pegawai->tipepns}}" autocomplete="off" readonly>
                             </div>
                         </div>
                         <!--/span-->
@@ -50,7 +50,7 @@
                         <div class="col-md-6">
                             <div class="form-group has-success">
                                 <label class="control-label">Status</label>
-                                <input type="text" value="Aktif" class="form-control" value="{{Auth::user()->status}}" autocomplete="off">
+                                <input type="text" value="Aktif" class="form-control" value="{{Auth::user()->status}}" autocomplete="off" readonly>
                             </div>
                         </div>
                         <!--/span-->
