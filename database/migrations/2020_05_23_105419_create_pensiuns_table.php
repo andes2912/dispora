@@ -22,6 +22,7 @@ class CreatePensiunsTable extends Migration
             $table->string('golongan');
             $table->string('kelas');
             $table->string('kedudukan');
+            $table->string('document');
             $table->timestamps();
 
             $table->foreign('pangkat_id')->references('id')->on('pangkats')->onDelete('cascade');
