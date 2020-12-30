@@ -20,7 +20,7 @@ class LaporanController extends Controller
                 return view('kadis.laporan.index', compact('pegawai'));
             }
         }
-        
+
     }
 
     // Filter Laporan #jabatan #golongan #status
@@ -30,7 +30,7 @@ class LaporanController extends Controller
             if (Auth::user()->role == 'Kadis' || Auth::user()->role == 'Admin') {
                 $pegawai = User::selectRaw('Users.*,a.jabatan,a.golongan')
                 ->leftJoin('pangkats as a','a.user_id','=','Users.id')
-                ->where('a.jabatan', $request->jabatan)
+                ->orwhere('a.jabatan', $request->jabatan)
                 ->orWhere('a.golongan', $request->golongan)
                 ->orWhere('Users.status', $request->status)
                 ->get();
@@ -43,9 +43,9 @@ class LaporanController extends Controller
                             <td> ".$item->nip."</td>
                             <td> ".$item->name."</td>
                             <td> ".$item->pegawai->kelamin."</td>
-                            <td> ".$item->pangkat->jabatan."</td>
+                            <td> ".$item->jabatan."</td>
                             <td> ".$item->pegawai->agama."</td>
-                          
+
                             ";
                     $return .= "</td>
                             </tr>";
@@ -74,8 +74,9 @@ class LaporanController extends Controller
                             <td> ".$no."</td>
                             <td> ".$item->nip."</td>
                             <td> ".$item->name."</td>
-                          
-                            ";
+                            <td> ".$item->pegawai->kelamin."</td>
+                            <td> ".$item->pangkat->jabatan ?? ''."</td>
+                            <td> ".$item->pegawai->agama."</td>";
                     $return .= "</td>
                             </tr>";
                     $no++;

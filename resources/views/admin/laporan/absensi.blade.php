@@ -26,7 +26,7 @@
                </div>
             </div>
             <div class="table-responsive m-t-40">
-               
+
                 <table id="myTable" class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -36,7 +36,6 @@
                             <th>Kelamin</th>
                             <th>Jabatan</th>
                             <th>Agama</th>
-                            {{-- <td>Cetak</td> --}}
                         </tr>
                     </thead>
                     <tbody id="refresh_tbody">
@@ -51,9 +50,6 @@
                                 <td>{{$item->pegawai->kelamin}}</td>
                                 <td>{{$item->pangkat->jabatan ?? '' }}</td>
                                 <td>{{$item->pegawai->agama}}</td>
-                                {{-- <td>
-                                    <i class="fa fa-print"></i>
-                                </td> --}}
                             </tr>
                         @php
                             $no++;
@@ -68,10 +64,10 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-        // filter 
-        $(document).on('click', '#filter', function (e) { 
+        // filter
+        $(document).on('click', '#filter', function (e) {
             var status = $("#status").val();
-            $.get('{{ Url("filter-laporan-absensi") }}',{'_token': $('meta[name=csrf-token]').attr('content'),status:status}, function(resp){  
+            $.get('{{ Url("filter-laporan-absensi") }}',{'_token': $('meta[name=csrf-token]').attr('content'),status:status}, function(resp){
             $("#refresh_tbody").html(resp);
             });
         });

@@ -37,6 +37,7 @@
                                 <td>{{$item->date}}</td>
                                 <td>{{$item->status_approval}}</td>
                                 <td>
+                                    <a href="{{asset('document_pegawai/'. $item->document)}}" target="blank_" class="btn btn-info btn-sm">File</a>
                                     @if ($item->status_approval == 'Proses')
                                         <button type="submit" id="approve_cuti" data-id-approve-cuti="{{$item->id}}" class="btn btn-info btn-sm">
                                             <i class="fa fa-check"></i>
@@ -60,7 +61,7 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-        // Approve Cuti 
+        // Approve Cuti
         $(document).on('click','#approve_cuti', function () {
         var id = $(this).attr('data-id-approve-cuti');
             $.get(' {{Url("cuti-approve")}}', {'_token' : $('meta[name=csrf-token]').attr('content'),id:id}, function(resp){

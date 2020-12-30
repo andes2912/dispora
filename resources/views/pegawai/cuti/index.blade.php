@@ -4,7 +4,7 @@
 <div class="col-12">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Data Cuti 
+            <h4 class="card-title">Data Cuti
                 @if (@Auth::user()->cuti->status_approval !== 'Proses')
                     <a href="{{route('cuti-pegawai.create')}}" class="btn btn-info btn-sm">Ajukan Cuti</a>
                 @endif
@@ -20,6 +20,7 @@
                             <th>Jumlah</th>
                             <th>Tgl Pengajuan</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,13 @@
                                 </td>
                                 <td>{{$item->date}}</td>
                                 <td>{{$item->status_approval}}</td>
+                                <td>
+                                  @if ($item->status_approval == 'Approve')
+                                    <a href="{{url('unduh-doc-approval-cuti/' .$item->id)}}" target="_blank" class="btn btn-primary btn-sm">Unduh</a>
+                                  @else
+                                    <a href="" class="btn btn-primary btn-sm disabled">Unduh</a>
+                                  @endif
+                                </td>
                             </tr>
                         <?php
                             $no++

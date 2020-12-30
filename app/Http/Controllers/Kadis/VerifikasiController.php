@@ -14,7 +14,7 @@ class VerifikasiController extends Controller
     {
         if (Auth::check()) {
             if (Auth::user()->role == "Kadis" && auth::user()->status == "Aktif") {
-                $cuti = cuti::where('id_approval',Auth::user()->id)->orderBy('id','DESC')->get();
+                $cuti = cuti::where('id_approval',Auth::user()->id)->orderBy('created_at',' DESC')->get();
                 return view('kadis.verifikasi.cuti.index', compact('cuti'));
             }
         } else {

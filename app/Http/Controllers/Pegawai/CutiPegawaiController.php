@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\{cuti,cuti_taken,cuti_count,User,pegawai};
 use Carbon\carbon;
 use Auth;
+use PDF;
 
 class CutiPegawaiController extends Controller
 {
@@ -74,7 +75,7 @@ class CutiPegawaiController extends Controller
                 if ($document) {
                     $cuti->document = $documents;
                 }
-        
+
                 if ($cuti->Save()) {
                     foreach ($request->add_date as $value) {
                         $cuti_date = new cuti_taken;
@@ -84,7 +85,7 @@ class CutiPegawaiController extends Controller
                         $cuti_date->save();
                     }
                 }
-                
+
                 $cek_cuti_count = cuti_count::where('nip',auth::user()->nip)->first();
                 $count = cuti_taken::where('cuti_id', $cuti->id)->get();
                 if ($cuti_date->save()) {
@@ -106,14 +107,14 @@ class CutiPegawaiController extends Controller
                         $cuti_update->Save();
                     }
                 }
-        
+
                 return redirect('cuti-pegawai');
             }
         } else {
             return redirect('home');
         }
 
-       
+
     }
 
 
@@ -155,5 +156,17 @@ class CutiPegawaiController extends Controller
                         }'
                         </select>';
             return $select;
+    }
+
+    // Unduh doc Approval cuti
+    public function doc_approval_cuti(Request $request)
+    {
+      $approval_cuti = cuti::where('user_id', Auth::user()->id)
+        ->where('id', $request->id)
+        ->first();
+
+      $pdf = PDF::loadView('pegawai.cuti.doc_approve', \compact('approval_cuti'))->setPaper('a4', 'potrait');
+      return $pdf->stream();
+
     }
 }

@@ -120,8 +120,8 @@
                             <div class="form-group">
                                 <label class="control-label">Jenis Kelamin</label>
                                 <select class="form-control custom-select" name="kelamin" data-placeholder="Choose a Category" tabindex="1">
-                                    <option value="Laki-Laki">Laki-Laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="Laki-Laki" @if(Auth::user()->pegawai->kelamin == 'Laki-Laki') selected @endif>Laki-Laki</option>
+                                    <option value="Perempuan" @if(Auth::user()->pegawai->kelamin == 'Perempuan') selected @endif>Perempuan</option>
                                 </select>
                             </div>
                         </div>
@@ -129,10 +129,10 @@
                             <div class="form-group">
                                 <label class="control-label">Agama</label>
                                 <select class="form-control custom-select" name="agama" data-placeholder="Choose a Category" tabindex="1">
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Budha">Budha</option>
-                                    <option value="Hindu">Hindu</option>
+                                    <option value="Islam" @if(Auth::user()->pegawai->agama == 'Islam') selected @endif>Islam</option>
+                                    <option value="Kristen" @if(Auth::user()->pegawai->agama == 'Kristen') selected @endif>Kristen</option>
+                                    <option value="Budha" @if(Auth::user()->pegawai->agama == 'Budha') selected @endif>Budha</option>
+                                    <option value="Hindu" @if(Auth::user()->pegawai->agama == 'Hindu') selected @endif>Hindu</option>
                                 </select>
                             </div>
                         </div>
@@ -145,8 +145,8 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control custom-select" name="statusnikah" data-placeholder="Choose a Category" tabindex="1">
-                                    <option value="Menikah">Menikah</option>
-                                    <option value="Lajang">Lajang</option>
+                                    <option value="Menikah" @if(Auth::user()->pegawai->statusnikah == 'Menikah') selected @endif>Menikah</option>
+                                    <option value="Lajang" @if(Auth::user()->pegawai->statusnikah == 'Lajang') selected @endif>Lajang</option>
                                 </select>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
 @section('scripts')
     <script type="text/javascript">
         $(".datepicker").datepicker( {
-            todayHighlight: !0, 
+            todayHighlight: !0,
             orientation: "bottom left",
         })
     </script>
