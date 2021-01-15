@@ -43,7 +43,7 @@ class LaporanController extends Controller
                             <td> ".$item->nip."</td>
                             <td> ".$item->name."</td>
                             <td> ".$item->pegawai->kelamin."</td>
-                            <td> ".$item->jabatan."</td>
+                            <td> ".$item->golongan."</td>
                             <td> ".$item->pegawai->agama."</td>
 
                             ";
