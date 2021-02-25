@@ -45,7 +45,7 @@
                         <h3 class="box-title m-b-20 text-center">LOGIN DISPORA</h3>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control @error('nip') is-invalid @enderror value="{{ old('nip') ?: old('nip') }} type="text" name="nip" placeholder="NIP or E-mail" required> 
+                                <input class="form-control @error('nip') is-invalid @enderror value="{{ old('nip') }} type="text" name="nip" placeholder="NIP or E-mail" required> 
                                 @error('nip')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
